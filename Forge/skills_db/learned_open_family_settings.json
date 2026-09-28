@@ -1,0 +1,25 @@
+{
+  "name": "open family settings",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+r"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "type",
+      "text": "ms-settings:family"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    }
+  ]
+}

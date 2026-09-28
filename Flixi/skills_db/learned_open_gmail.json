@@ -1,0 +1,25 @@
+{
+  "name": "open gmail",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+r"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "type",
+      "text": "brave https://mail.google.com/mail/u/0/#search/"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    }
+  ]
+}

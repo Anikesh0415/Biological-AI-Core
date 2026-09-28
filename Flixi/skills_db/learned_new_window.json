@@ -1,0 +1,9 @@
+{
+  "name": "new window",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+n"
+    }
+  ]
+}

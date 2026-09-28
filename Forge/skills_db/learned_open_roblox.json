@@ -1,0 +1,25 @@
+{
+  "name": "open roblox",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "type",
+      "text": "roblox"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    }
+  ]
+}

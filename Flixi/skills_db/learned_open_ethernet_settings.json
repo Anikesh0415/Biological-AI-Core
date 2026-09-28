@@ -1,0 +1,25 @@
+{
+  "name": "open ethernet settings",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+r"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "type",
+      "text": "ms-settings:network-ethernet"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    }
+  ]
+}

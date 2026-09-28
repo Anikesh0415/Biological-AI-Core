@@ -1,0 +1,9 @@
+{
+  "name": "open action center",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+a"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "take screenshot",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+shift+s"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "search {query} on the guardian",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+r"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "type",
+      "text": "brave https://www.theguardian.com/info/developer-blog/search?q={query}"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    }
+  ]
+}

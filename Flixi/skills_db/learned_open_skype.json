@@ -1,0 +1,25 @@
+{
+  "name": "open skype",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+r"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "type",
+      "text": "brave https://www.skype.com/en/"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    }
+  ]
+}

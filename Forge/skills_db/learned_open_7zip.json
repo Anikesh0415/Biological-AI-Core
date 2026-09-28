@@ -1,0 +1,25 @@
+{
+  "name": "open 7zip",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "type",
+      "text": "7zip"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    }
+  ]
+}

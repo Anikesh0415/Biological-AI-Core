@@ -1,0 +1,25 @@
+{
+  "name": "open tips",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "type",
+      "text": "tips"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    }
+  ]
+}

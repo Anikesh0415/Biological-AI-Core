@@ -1,0 +1,25 @@
+{
+  "name": "open system information",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "type",
+      "text": "system information"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    }
+  ]
+}

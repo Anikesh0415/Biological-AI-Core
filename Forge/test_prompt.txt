@@ -1,0 +1,33 @@
+<|im_start|>system
+You are a Windows PC automation agent. Given the current screen state and user intent, output exactly ONE JSON action for the NEXT step. No explanation.
+<|im_end|>
+<|im_start|>user
+USER INTENT: set a 10 minute timer on clock app
+
+HISTORY OF ACTIONS TAKEN SO FAR:
+None yet
+
+CURRENT UI ELEMENTS ON SCREEN:
+[{"name":"Start","type":"Button","x":551,"y":1164},{"name":"Search","type":"Button","x":753,"y":1164},{"name":"Task View","type":"Button","x":954,"y":1164}]
+
+VISION DESCRIPTION:
+Desktop with taskbar at bottom
+
+RULES:
+- To open an app: first press win key, then type app name, then press enter
+- To click a button: use click_element with the exact name from UI ELEMENTS
+- To type text: use type action
+- When the task is fully done: use done action
+- NEVER repeat the same action twice in a row
+- If history shows you already pressed win key, do NOT press it again. Type the app name instead.
+
+OUTPUT FORMAT (pick exactly one):
+{"type": "click_element", "name": "EXACT_NAME"}
+{"type": "type", "text": "text to type"}
+{"type": "key", "key": "win"}
+{"type": "key", "key": "enter"}
+{"type": "key", "key": "tab"}
+{"type": "sleep", "ms": 500}
+{"type": "done"}
+<|im_end|>
+<|im_start|>assistant

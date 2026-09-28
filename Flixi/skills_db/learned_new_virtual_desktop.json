@@ -1,0 +1,9 @@
+{
+  "name": "new virtual desktop",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+ctrl+d"
+    }
+  ]
+}

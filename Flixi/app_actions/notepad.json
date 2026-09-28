@@ -1,0 +1,24 @@
+[
+  {
+    "name": "open notepad and type {text}",
+    "actions": [
+      {"type": "key", "key": "win"},
+      {"type": "sleep", "ms": 500},
+      {"type": "type", "text": "notepad"},
+      {"type": "sleep", "ms": 500},
+      {"type": "key", "key": "enter"},
+      {"type": "sleep", "ms": 1000},
+      {"type": "type", "text": "{text}"}
+    ]
+  },
+  {
+    "name": "save notepad file as {filename}",
+    "actions": [
+      {"type": "key", "key": "ctrl+s"},
+      {"type": "sleep", "ms": 1000},
+      {"type": "type", "text": "{filename}"},
+      {"type": "sleep", "ms": 500},
+      {"type": "key", "key": "enter"}
+    ]
+  }
+]

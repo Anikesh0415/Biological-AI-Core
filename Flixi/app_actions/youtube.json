@@ -1,0 +1,27 @@
+[
+  {
+    "name": "search {query} on youtube",
+    "actions": [
+      {"type": "key", "key": "win+r"},
+      {"type": "sleep", "ms": 500},
+      {"type": "type", "text": "chrome https://www.youtube.com/results?search_query={query}"},
+      {"type": "sleep", "ms": 500},
+      {"type": "key", "key": "enter"}
+    ]
+  },
+  {
+    "name": "play first video on youtube",
+    "actions": [
+      {"type": "sleep", "ms": 2000},
+      {"type": "key", "key": "tab"},
+      {"type": "sleep", "ms": 200},
+      {"type": "key", "key": "tab"},
+      {"type": "sleep", "ms": 200},
+      {"type": "key", "key": "tab"},
+      {"type": "sleep", "ms": 200},
+      {"type": "key", "key": "tab"},
+      {"type": "sleep", "ms": 200},
+      {"type": "key", "key": "enter"}
+    ]
+  }
+]

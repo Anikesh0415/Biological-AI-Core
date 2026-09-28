@@ -1,0 +1,9 @@
+{
+  "name": "fullscreen",
+  "actions": [
+    {
+      "type": "key",
+      "key": "f11"
+    }
+  ]
+}

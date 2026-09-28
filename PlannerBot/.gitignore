@@ -1,0 +1,36 @@
+# Binaries and executables
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+/PlannerBot
+/PlannerBot-*
+/planner
+*.zip
+
+# Local databases and user ledgers
+*.db
+*.db-journal
+*.db-lock
+pairing_code.txt
+
+# LLM Models and large weight files
+*.gguf
+*.bin
+*.pt
+*.onnx
+models/
+
+# Test artifacts and temporary scratch files
+.tempmediaStorage/
+scratch/
+*.log
+
+# OS / Editor metadata
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp

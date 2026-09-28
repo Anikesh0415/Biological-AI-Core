@@ -1,0 +1,173 @@
+{
+  "name": "Set a 10-minute timer in clock app",
+  "actions": [
+    {
+      "type": "type",
+      "text": "["
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "l"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "click_element",
+      "name": "Timer"
+    },
+    {
+      "type": "click_element",
+      "name": "Add new timer"
+    },
+    {
+      "type": "move",
+      "x": 683,
+      "y": 372
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "move",
+      "x": 683,
+      "y": 372
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "move",
+      "x": 683,
+      "y": 372
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "move",
+      "x": 683,
+      "y": 372
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "move",
+      "x": 683,
+      "y": 372
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "move",
+      "x": 683,
+      "y": 372
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "move",
+      "x": 683,
+      "y": 372
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "move",
+      "x": 683,
+      "y": 372
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "move",
+      "x": 683,
+      "y": 372
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "move",
+      "x": 683,
+      "y": 372
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "click_element",
+      "name": "Save"
+    },
+    {
+      "type": "click_element",
+      "name": "Start"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": " "
+    }
+  ]
+}

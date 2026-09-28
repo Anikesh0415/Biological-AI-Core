@@ -1,0 +1,9 @@
+{
+  "name": "switch app",
+  "actions": [
+    {
+      "type": "key",
+      "key": "alt+tab"
+    }
+  ]
+}

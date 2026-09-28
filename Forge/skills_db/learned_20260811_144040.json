@@ -1,0 +1,125 @@
+{
+  "name": "check weather in surat",
+  "actions": [
+    {
+      "type": "type",
+      "text": "["
+    },
+    {
+      "type": "type",
+      "text": "b"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "click_element",
+      "name": "Desktop"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": "f"
+    },
+    {
+      "type": "click_element",
+      "name": "Ask anything, find anything."
+    },
+    {
+      "type": "move",
+      "x": 1871,
+      "y": 50
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "click_element",
+      "name": "Address and search bar"
+    },
+    {
+      "type": "type",
+      "text": "w"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "u"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": " "
+    }
+  ]
+}

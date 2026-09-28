@@ -1,0 +1,20 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": ["click_element", "move", "click", "type", "key", "sleep", "done"]
+      },
+      "name": { "type": "string" },
+      "x": { "type": "integer" },
+      "y": { "type": "integer" },
+      "key": { "type": "string" },
+      "text": { "type": "string" },
+      "ms": { "type": "integer" }
+    },
+    "required": ["type"],
+    "additionalProperties": false
+  }
+}

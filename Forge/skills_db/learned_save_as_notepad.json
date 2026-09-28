@@ -1,0 +1,9 @@
+{
+  "name": "save as notepad",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+shift+s"
+    }
+  ]
+}

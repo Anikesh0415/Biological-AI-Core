@@ -1,0 +1,9 @@
+{
+  "name": "switch virtual desktop right",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+ctrl+right"
+    }
+  ]
+}

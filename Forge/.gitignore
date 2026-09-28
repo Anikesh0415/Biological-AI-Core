@@ -1,0 +1,70 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual Environment
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment Variables
+.env
+.env.local
+
+# IDEs
+.vscode/
+.idea/
+
+# Mac
+.DS_Store
+
+# Node/JS (if you have any frontend npm installs)
+node_modules/
+package-lock.json
+
+# Model weights or large data
+*.pt
+*.bin
+*.onnx
+*.gguf
+*.safetensors
+models/
+outputs/
+unsloth_compiled_cache/
+src/vlm_pipeline/export/*.gguf
+src/vlm_pipeline/export/forge_vlm_model*
+
+# Runtime Data & Logs
+logs/
+*.log
+chat_history.json
+ui/vision_capture.jpg
+data/chroma_db/
+data/long_term_memory.json
+# Confidential Organoid Data
+*.hdf5
+*.parquet
+fs369data/
+fs437_export/
+fs*/
+dataset/
+
+temp_screenshot.png
+
+go/
+llama.cpp/
+forge.exe
+
+uia_dumper.exe
+uia_dumper.cs
+
+# Local DB & Temp Files
+brain.db
+temp_prompt.txt
+notify.ps1
+input.ps1
+*.exe~

@@ -1,0 +1,65 @@
+======================================
+       Frequency Band Report          
+======================================
+
+1. Analysis Parameters:
+   - Window Duration: 60.0 seconds
+   - Continuous Sampling Frequency (Fs): 1000.0 Hz
+   - Gaussian SDF Sigma: 10.0 ms
+   - Number of Channels Analyzed: 10
+
+2. Multi-Band Complexity & Entropy Analysis:
+
+--- Band: Theta (4-8 Hz) ---
+  State 1: Spontaneous Activity (Baseline)
+     - Mean Normalized LZC: 0.0801
+     - Mean Approx Entropy: 0.0647
+  State 2: Stimulated Activity
+     - Mean Normalized LZC: 0.0809
+     - Mean Approx Entropy: 0.0650
+  Complexity Shift:
+     - Delta LZC:  +0.0008 (+0.99%)
+     - p-value LZC: 6.7773e-01
+     - Delta ApEn: +0.0004 (+0.55%)
+     - p-value ApEn: 4.9219e-01
+
+--- Band: Alpha (8-12 Hz) ---
+  State 1: Spontaneous Activity (Baseline)
+     - Mean Normalized LZC: 0.1004
+     - Mean Approx Entropy: 0.0973
+  State 2: Stimulated Activity
+     - Mean Normalized LZC: 0.1003
+     - Mean Approx Entropy: 0.0966
+  Complexity Shift:
+     - Delta LZC:  -0.0001 (-0.11%)
+     - p-value LZC: 7.3438e-01
+     - Delta ApEn: -0.0007 (-0.76%)
+     - p-value ApEn: 2.7344e-02
+
+--- Band: Beta (12-30 Hz) ---
+  State 1: Spontaneous Activity (Baseline)
+     - Mean Normalized LZC: 0.1599
+     - Mean Approx Entropy: 0.1374
+  State 2: Stimulated Activity
+     - Mean Normalized LZC: 0.1820
+     - Mean Approx Entropy: 0.1497
+  Complexity Shift:
+     - Delta LZC:  +0.0221 (+13.85%)
+     - p-value LZC: 1.9531e-03
+     - Delta ApEn: +0.0122 (+8.91%)
+     - p-value ApEn: 1.9531e-03
+
+--- Band: Gamma (30-100 Hz) ---
+  State 1: Spontaneous Activity (Baseline)
+     - Mean Normalized LZC: 0.1688
+     - Mean Approx Entropy: 0.2332
+  State 2: Stimulated Activity
+     - Mean Normalized LZC: 0.2104
+     - Mean Approx Entropy: 0.2385
+  Complexity Shift:
+     - Delta LZC:  +0.0416 (+24.66%)
+     - p-value LZC: 1.9531e-03
+     - Delta ApEn: +0.0052 (+2.25%)
+     - p-value ApEn: 1.9531e-03
+
+======================================

@@ -1,0 +1,29 @@
+{
+  "name": "Mute the system volume",
+  "actions": [
+    {
+      "type": "move",
+      "x": 1666,
+      "y": 1183
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "click_element",
+      "name": "Desktop"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": " "
+    }
+  ]
+}

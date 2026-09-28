@@ -1,0 +1,9 @@
+{
+  "name": "open dictation",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+h"
+    }
+  ]
+}

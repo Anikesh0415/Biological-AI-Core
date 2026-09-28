@@ -1,0 +1,9 @@
+{
+  "name": "new tab",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+t"
+    }
+  ]
+}

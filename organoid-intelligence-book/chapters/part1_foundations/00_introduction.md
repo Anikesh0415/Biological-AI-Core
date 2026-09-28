@@ -1,0 +1,3 @@
+# Introduction to Organoid Intelligence
+
+This book explores the theoretical and empirical foundations of computing with biological neural substrates...

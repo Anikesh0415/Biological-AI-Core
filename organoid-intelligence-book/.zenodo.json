@@ -1,0 +1,26 @@
+{
+  "title": "Organoid Intelligence: From Foundations to Frontier Wetware Computing",
+  "description": "Comprehensive open-access textbook and research compendium on Organoid Intelligence (OI) and biological wetware computing. Includes: (1) An 82-page human-language beginner's guide with intuitive analogies; (2) A 43-page master technical volume formalizing Causal Logic, Reservoir Computing with Short-Term Plasticity, Inverse Ising Thermodynamics, Topological Chaos (TDA), and Renormalization Group Scaling Laws; (3) Four verified empirical discoveries on live 30kHz FinalSpark organoid electrophysiology datasets (fs369 and fs437); (4) Complete source code, simulation arrays, and 24 high-resolution figures.",
+  "creators": [
+    {
+      "name": "Tiwari, Anikesh",
+      "affiliation": "Independent Researcher in Organoid Intelligence"
+    }
+  ],
+  "access_right": "open",
+  "license": "MIT",
+  "keywords": [
+    "Organoid Intelligence",
+    "Wetware Computing",
+    "Biological Neural Networks",
+    "Transfer Entropy",
+    "Inverse Ising Model",
+    "Topological Data Analysis",
+    "Renormalization Group",
+    "FinalSpark",
+    "Biocomputing",
+    "Electrophysiology"
+  ],
+  "upload_type": "publication",
+  "publication_type": "book"
+}

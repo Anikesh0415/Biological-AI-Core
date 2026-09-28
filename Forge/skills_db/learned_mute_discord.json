@@ -1,0 +1,9 @@
+{
+  "name": "mute discord",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+shift+m"
+    }
+  ]
+}

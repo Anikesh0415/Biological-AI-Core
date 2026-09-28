@@ -1,0 +1,9 @@
+{
+  "name": "refresh",
+  "actions": [
+    {
+      "type": "key",
+      "key": "f5"
+    }
+  ]
+}

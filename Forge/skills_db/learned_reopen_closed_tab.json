@@ -1,0 +1,9 @@
+{
+  "name": "reopen closed tab",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+shift+t"
+    }
+  ]
+}

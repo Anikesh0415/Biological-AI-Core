@@ -1,0 +1,49 @@
+{
+  "name": "google {query}",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "type",
+      "text": "brave"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    },
+    {
+      "type": "sleep",
+      "ms": 2000
+    },
+    {
+      "type": "key",
+      "key": "ctrl+l"
+    },
+    {
+      "type": "sleep",
+      "ms": 500
+    },
+    {
+      "type": "type",
+      "text": "{query}"
+    },
+    {
+      "type": "sleep",
+      "ms": 500
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    }
+  ]
+}

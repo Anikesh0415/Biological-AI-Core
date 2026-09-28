@@ -1,0 +1,33 @@
+{
+  "name": "open calculator",
+  "actions": [
+    {
+      "type": "type",
+      "text": "["
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "l"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": " "
+    }
+  ]
+}

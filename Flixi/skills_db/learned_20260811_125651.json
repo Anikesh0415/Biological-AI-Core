@@ -1,0 +1,21 @@
+{
+  "name": "closing the minimized app",
+  "actions": [
+    {
+      "type": "type",
+      "text": "["
+    },
+    {
+      "type": "click_element",
+      "name": "Desktop"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": " "
+    }
+  ]
+}

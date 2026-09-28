@@ -1,0 +1,9 @@
+{
+  "name": "next track",
+  "actions": [
+    {
+      "type": "key",
+      "key": "audio_next"
+    }
+  ]
+}

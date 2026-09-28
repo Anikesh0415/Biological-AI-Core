@@ -1,0 +1,197 @@
+{
+  "name": "opening whatsapp and sending the message",
+  "actions": [
+    {
+      "type": "type",
+      "text": "["
+    },
+    {
+      "type": "type",
+      "text": "w"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "p"
+    },
+    {
+      "type": "type",
+      "text": "p"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": "k"
+    },
+    {
+      "type": "move",
+      "x": 572,
+      "y": 779
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": "k"
+    },
+    {
+      "type": "move",
+      "x": 389,
+      "y": 179
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "type",
+      "text": "b"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "l"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "m"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "d"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "y"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "w"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "f"
+    },
+    {
+      "type": "type",
+      "text": "f"
+    },
+    {
+      "type": "type",
+      "text": "¡"
+    },
+    {
+      "type": "type",
+      "text": "¿"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": " "
+    }
+  ]
+}

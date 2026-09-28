@@ -1,0 +1,17 @@
+# Production grammar for strict Reminder JSON extraction
+# Schema: {"task": string, "time": string}
+
+root ::= "{" space task-kv "," space time-kv space "}"
+
+task-kv ::= "\"task\"" space ":" space string
+time-kv ::= "\"time\"" space ":" space string
+
+# String definition conforming to RFC 8259
+string ::= "\"" char* "\""
+
+# Character definition: unescaped Unicode (excluding control chars, quote, backslash)
+# or valid JSON escape sequences (\", \\, \/, \b, \f, \n, \r, \t, \uXXXX)
+char ::= [^"\\\x7F\x00-\x1F] | [\\] (["\\/bfnrt] | "u" [0-9a-fA-F]{4})
+
+# Bounded whitespace rule: empty, single space, or bounded newline indentation
+space ::= | " " | "\n"{1,2} [ \t]{0,20}

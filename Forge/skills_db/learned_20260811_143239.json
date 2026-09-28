@@ -1,0 +1,37 @@
+{
+  "name": "open notepad",
+  "actions": [
+    {
+      "type": "type",
+      "text": "["
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": " "
+    }
+  ]
+}

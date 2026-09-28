@@ -1,0 +1,13 @@
+root ::= Action
+
+Action ::= ClickAction | TypeAction | KeyAction | SleepAction | DoneAction
+
+ClickAction ::= "{" ws "\"type\"" ws ":" ws "\"click_element\"" ws "," ws "\"name\"" ws ":" ws string ws "}"
+TypeAction ::= "{" ws "\"type\"" ws ":" ws "\"type\"" ws "," ws "\"text\"" ws ":" ws string ws "}"
+KeyAction ::= "{" ws "\"type\"" ws ":" ws "\"key\"" ws "," ws "\"key\"" ws ":" ws string ws "}"
+SleepAction ::= "{" ws "\"type\"" ws ":" ws "\"sleep\"" ws "," ws "\"ms\"" ws ":" ws integer ws "}"
+DoneAction ::= "{" ws "\"type\"" ws ":" ws "\"done\"" ws "}"
+
+string ::= "\"" [^"]* "\""
+integer ::= [0-9]+
+ws ::= [ \t\n]*

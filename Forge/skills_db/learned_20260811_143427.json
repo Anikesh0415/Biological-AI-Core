@@ -1,0 +1,57 @@
+{
+  "name": "launch browser",
+  "actions": [
+    {
+      "type": "type",
+      "text": "["
+    },
+    {
+      "type": "type",
+      "text": "b"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "v"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "move",
+      "x": 1866,
+      "y": 48
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "click_element",
+      "name": "Ask anything, find anything."
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": " "
+    }
+  ]
+}

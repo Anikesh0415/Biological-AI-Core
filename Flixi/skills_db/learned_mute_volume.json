@@ -1,0 +1,9 @@
+{
+  "name": "mute volume",
+  "actions": [
+    {
+      "type": "key",
+      "key": "audio_mute"
+    }
+  ]
+}

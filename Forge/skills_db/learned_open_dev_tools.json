@@ -1,0 +1,9 @@
+{
+  "name": "open dev tools",
+  "actions": [
+    {
+      "type": "key",
+      "key": "f12"
+    }
+  ]
+}

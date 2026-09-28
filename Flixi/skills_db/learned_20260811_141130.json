@@ -1,0 +1,1745 @@
+{
+  "name": "gathering information from gemini",
+  "actions": [
+    {
+      "type": "type",
+      "text": "["
+    },
+    {
+      "type": "type",
+      "text": "g"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "w"
+    },
+    {
+      "type": "type",
+      "text": "\b"
+    },
+    {
+      "type": "type",
+      "text": "m"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "type",
+      "text": " "
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "\b"
+    },
+    {
+      "type": "type",
+      "text": "g"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "m"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "¼"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "m"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "f"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "g"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "\b"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": " "
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "g"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": " "
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "d"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "w"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "y"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "\b"
+    },
+    {
+      "type": "type",
+      "text": "u"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "g"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "f"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "m"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "p"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "f"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "p"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "d"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "m"
+    },
+    {
+      "type": "type",
+      "text": "p"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "l"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "d"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "u"
+    },
+    {
+      "type": "type",
+      "text": "m"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "f"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "m"
+    },
+    {
+      "type": "type",
+      "text": "y"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "u"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "¼"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "w"
+    },
+    {
+      "type": "type",
+      "text": "u"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "d"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "k"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "w"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "l"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "d"
+    },
+    {
+      "type": "type",
+      "text": "g"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "u"
+    },
+    {
+      "type": "type",
+      "text": "l"
+    },
+    {
+      "type": "type",
+      "text": "d"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "b"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "f"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "u"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "l"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "d"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "w"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "u"
+    },
+    {
+      "type": "type",
+      "text": "l"
+    },
+    {
+      "type": "type",
+      "text": "d"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "b"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "u"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "f"
+    },
+    {
+      "type": "type",
+      "text": "y"
+    },
+    {
+      "type": "type",
+      "text": "\b"
+    },
+    {
+      "type": "type",
+      "text": "u"
+    },
+    {
+      "type": "type",
+      "text": "l"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "¼"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "p"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "w"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "u"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "k"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "d"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "þ"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "\b"
+    },
+    {
+      "type": "type",
+      "text": "g"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "þ"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "\t"
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "type",
+      "text": "("
+    },
+    {
+      "type": "move",
+      "x": 776,
+      "y": 211
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "click_element",
+      "name": "Research Report: Testing the Agentic OS"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "click_element",
+      "name": "Forge"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": " "
+    }
+  ]
+}

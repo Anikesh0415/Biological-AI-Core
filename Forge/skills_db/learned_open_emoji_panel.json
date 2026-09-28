@@ -1,0 +1,9 @@
+{
+  "name": "open emoji panel",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+."
+    }
+  ]
+}

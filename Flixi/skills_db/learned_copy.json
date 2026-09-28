@@ -1,0 +1,9 @@
+{
+  "name": "copy",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+c"
+    }
+  ]
+}

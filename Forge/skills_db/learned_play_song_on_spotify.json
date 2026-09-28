@@ -1,0 +1,65 @@
+{
+  "name": "play {song} on spotify",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "type",
+      "text": "spotify"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    },
+    {
+      "type": "sleep",
+      "ms": 4000
+    },
+    {
+      "type": "key",
+      "key": "ctrl+l"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "type",
+      "text": "{song}"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    },
+    {
+      "type": "sleep",
+      "ms": 1000
+    },
+    {
+      "type": "key",
+      "key": "tab"
+    },
+    {
+      "type": "sleep",
+      "ms": 100
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    }
+  ]
+}

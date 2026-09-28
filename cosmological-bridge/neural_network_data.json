@@ -1,0 +1,187 @@
+{
+  "metrics": {
+    "average_degree": 2.9411764705882355,
+    "clustering_coefficient": 0.7843137254901961,
+    "network_type": "Biological (Filtered 95th Percentile)"
+  },
+  "nodes": [
+    {
+      "id": "72"
+    },
+    {
+      "id": "74"
+    },
+    {
+      "id": "77"
+    },
+    {
+      "id": "87"
+    },
+    {
+      "id": "79"
+    },
+    {
+      "id": "84"
+    },
+    {
+      "id": "86"
+    },
+    {
+      "id": "85"
+    },
+    {
+      "id": "92"
+    },
+    {
+      "id": "93"
+    },
+    {
+      "id": "83"
+    },
+    {
+      "id": "81"
+    },
+    {
+      "id": "94"
+    },
+    {
+      "id": "82"
+    },
+    {
+      "id": "80"
+    },
+    {
+      "id": "76"
+    },
+    {
+      "id": "78"
+    }
+  ],
+  "edges": [
+    {
+      "source": "72",
+      "target": "74",
+      "weight": 28048507.0
+    },
+    {
+      "source": "77",
+      "target": "87",
+      "weight": 8127767.0
+    },
+    {
+      "source": "72",
+      "target": "79",
+      "weight": 36512614.0
+    },
+    {
+      "source": "74",
+      "target": "79",
+      "weight": 30572171.0
+    },
+    {
+      "source": "84",
+      "target": "87",
+      "weight": 6627853.0
+    },
+    {
+      "source": "77",
+      "target": "86",
+      "weight": 8283514.0
+    },
+    {
+      "source": "86",
+      "target": "87",
+      "weight": 67970903.0
+    },
+    {
+      "source": "85",
+      "target": "87",
+      "weight": 59129642.0
+    },
+    {
+      "source": "85",
+      "target": "86",
+      "weight": 59288874.0
+    },
+    {
+      "source": "92",
+      "target": "93",
+      "weight": 9370241.0
+    },
+    {
+      "source": "83",
+      "target": "84",
+      "weight": 56128149.0
+    },
+    {
+      "source": "81",
+      "target": "83",
+      "weight": 6792176.0
+    },
+    {
+      "source": "92",
+      "target": "94",
+      "weight": 7230430.0
+    },
+    {
+      "source": "93",
+      "target": "94",
+      "weight": 9535040.0
+    },
+    {
+      "source": "82",
+      "target": "84",
+      "weight": 12445154.0
+    },
+    {
+      "source": "82",
+      "target": "83",
+      "weight": 12624689.0
+    },
+    {
+      "source": "81",
+      "target": "84",
+      "weight": 7368072.0
+    },
+    {
+      "source": "80",
+      "target": "81",
+      "weight": 28467308.0
+    },
+    {
+      "source": "81",
+      "target": "86",
+      "weight": 16133698.0
+    },
+    {
+      "source": "81",
+      "target": "87",
+      "weight": 17162438.0
+    },
+    {
+      "source": "77",
+      "target": "81",
+      "weight": 7546839.0
+    },
+    {
+      "source": "81",
+      "target": "85",
+      "weight": 12252469.0
+    },
+    {
+      "source": "76",
+      "target": "78",
+      "weight": 13876419.0
+    },
+    {
+      "source": "77",
+      "target": "78",
+      "weight": 43602715.0
+    },
+    {
+      "source": "76",
+      "target": "77",
+      "weight": 31240435.0
+    }
+  ]
+}

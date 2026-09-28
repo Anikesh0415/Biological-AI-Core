@@ -1,0 +1,9 @@
+{
+  "name": "new page in onenote",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+n"
+    }
+  ]
+}

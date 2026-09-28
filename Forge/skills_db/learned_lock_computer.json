@@ -1,0 +1,9 @@
+{
+  "name": "lock computer",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+l"
+    }
+  ]
+}

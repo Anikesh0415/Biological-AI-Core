@@ -1,0 +1,2789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planner Bot — Personal Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+    <style>
+        :root {
+            --bg-base: #090b14;
+            --bg-sidebar: rgba(13, 16, 28, 0.72);
+            --bg-card: rgba(20, 25, 44, 0.58);
+            --bg-card-hover: rgba(28, 35, 62, 0.82);
+            --bg-dock: rgba(17, 21, 38, 0.78);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-medium: rgba(255, 255, 255, 0.16);
+            --border-hover: rgba(165, 180, 252, 0.42);
+            --border-focus: rgba(129, 140, 248, 0.65);
+            --text-title: #ffffff;
+            --text-body: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-faint: #64748b;
+            --accent-primary: #818cf8;
+            --accent-violet: #a855f7;
+            --accent-cyan: #06b6d4;
+            --accent-rose: #f43f5e;
+            --accent-amber: #f59e0b;
+            --accent-emerald: #10b981;
+            --success-color: #10b981;
+            --danger-color: #f87171;
+            --font-display: 'Instrument Sans', -apple-system, sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Custom Sleek Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.14);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.28);
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-body);
+            font-family: var(--font-body);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Fluid Chromatic Living Canvas (Optimized 60-120 FPS GPU Engine) */
+        .ambient-spectrum {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                radial-gradient(ellipse 70% 60% at 20% 0%, rgba(99, 102, 241, 0.24) 0%, transparent 70%),
+                radial-gradient(ellipse 65% 60% at 85% 25%, rgba(168, 85, 247, 0.22) 0%, transparent 70%),
+                radial-gradient(ellipse 70% 65% at 35% 95%, rgba(6, 182, 212, 0.20) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 55% at -5% 45%, rgba(244, 63, 94, 0.16) 0%, transparent 70%),
+                var(--bg-base);
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+        }
+
+        .ambient-spectrum::before {
+            content: '';
+            position: absolute;
+            inset: -15%;
+            background: 
+                radial-gradient(circle 500px at 25% 25%, rgba(99, 102, 241, 0.18) 0%, transparent 65%),
+                radial-gradient(circle 500px at 80% 65%, rgba(168, 85, 247, 0.16) 0%, transparent 65%),
+                radial-gradient(circle 450px at 55% 85%, rgba(6, 182, 212, 0.15) 0%, transparent 65%);
+            opacity: 0.85;
+            will-change: transform;
+            animation: fluidDrift 22s ease-in-out infinite alternate;
+            transform: translate3d(0, 0, 0);
+        }
+
+        @keyframes fluidDrift {
+            0% { transform: translate3d(0px, 0px, 0) scale(1); }
+            50% { transform: translate3d(24px, -18px, 0) scale(1.03); }
+            100% { transform: translate3d(-20px, 20px, 0) scale(0.98); }
+        }
+
+        .ambient-spectrum::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 36px 36px;
+            opacity: 0.45;
+            pointer-events: none;
+        }
+
+        /* Sidebar */
+        aside {
+            width: 260px;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 10;
+            flex-shrink: 0;
+            backdrop-filter: blur(16px) saturate(140%);
+            transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, border-color 0.2s ease;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        body.sidebar-collapsed aside {
+            width: 0 !important;
+            min-width: 0 !important;
+            border-right-color: transparent !important;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-15px);
+        }
+
+        .sidebar-header {
+            padding: 1.1rem 1.1rem 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-width: 260px;
+        }
+
+        .btn-sidebar-toggle {
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-out);
+            flex-shrink: 0;
+        }
+        .btn-sidebar-toggle:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--border-hover);
+            color: var(--text-title);
+            transform: translateY(-1px);
+        }
+        .btn-sidebar-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .app-brand-studio {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .brand-mark-group {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .brand-wordmark {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.15rem;
+            letter-spacing: 0.09em;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .brand-sub-badge {
+            font-family: var(--font-display);
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            padding: 0.12rem 0.42rem;
+            border-radius: 5px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(168, 85, 247, 0.25));
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            color: #e0e7ff;
+        }
+
+        .brand-status-jewel {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 10px #10b981;
+            animation: jewelPulse 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes jewelPulse {
+            0% { opacity: 0.7; transform: scale(0.9); box-shadow: 0 0 6px #10b981; }
+            100% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 14px #34d399, 0 0 3px #a7f3d0; }
+        }
+
+        .btn-new-chat {
+            margin: 0.85rem 1.1rem 0.5rem;
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-title);
+            font-family: var(--font-display);
+            font-size: 0.88rem;
+            font-weight: 600;
+            padding: 0.65rem 0.95rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            cursor: pointer;
+            transition: all 0.25s var(--ease-out);
+        }
+        .btn-new-chat:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--border-hover);
+            transform: translateY(-1px);
+        }
+        .btn-new-chat:active { transform: scale(0.98); }
+
+        .nav-list {
+            flex: 1;
+            padding: 0.75rem 0.65rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .nav-heading {
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            padding: 0.85rem 0.65rem 0.35rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0.75rem;
+            border-radius: 10px;
+            color: var(--text-body);
+            font-size: 0.87rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-out);
+            border: 1px solid transparent;
+        }
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-title);
+            transform: translateX(2px);
+        }
+        .nav-link.active {
+            background: var(--accent-soft);
+            color: var(--accent-primary);
+            border-color: rgba(129, 140, 248, 0.15);
+            font-weight: 600;
+        }
+
+        .sidebar-footer {
+            padding: 1rem 1.1rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .profile-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 0.75rem;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-subtle);
+            cursor: pointer;
+            transition: all 0.2s var(--ease-out);
+        }
+        .profile-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--border-hover);
+        }
+
+        .profile-title {
+            font-family: var(--font-display);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-title);
+            letter-spacing: 0.03em;
+        }
+        .profile-subtitle {
+            font-size: 0.72rem;
+            color: var(--success-color);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-top: 0.1rem;
+        }
+
+        /* Main Workspace */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Minimal Header */
+        header {
+            height: 50px;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+            z-index: 5;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn-mesh-sync {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-body);
+            padding: 0.4rem 0.85rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            transition: all 0.2s var(--ease-out);
+        }
+        .btn-mesh-sync:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--border-hover);
+            color: var(--text-title);
+        }
+
+        /* Chat Viewport (Full-width for far-right edge scrollbar) */
+        .chat-viewport {
+            flex: 1;
+            width: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            position: relative;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+        }
+        .chat-viewport::-webkit-scrollbar {
+            width: 5px;
+        }
+        .chat-viewport::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .chat-viewport::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 9999px;
+            transition: background 0.2s ease;
+        }
+        .chat-viewport:hover::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.22);
+        }
+        .chat-viewport::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        /* Centered Chat Content Container */
+        .chat-container {
+            max-width: 820px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 1rem 1.5rem 170px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            min-height: 100%;
+        }
+
+        .chat-container:has(#hero-welcome) {
+            padding-bottom: 90px;
+            padding-top: 0;
+            justify-content: center;
+        }
+        main:has(#hero-welcome) .dock-quick-chips {
+            display: none;
+        }
+
+        /* Hero Welcome */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: auto 0;
+            padding: 0 0 0.5rem;
+            animation: heroFadeIn 0.8s var(--ease-out);
+        }
+        @keyframes heroFadeIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.14), rgba(168, 85, 247, 0.14));
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: #c4b5fd;
+            margin-bottom: 0.35rem;
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
+        }
+        .badge-glow-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #818cf8;
+            box-shadow: 0 0 8px #818cf8;
+        }
+
+        .hero-prompt {
+            font-family: var(--font-display);
+            font-size: 1.85rem;
+            font-weight: 800;
+            letter-spacing: -0.035em;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 0.25rem;
+            text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-desc {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            margin-bottom: 0.9rem;
+            font-weight: 400;
+            max-width: 500px;
+        }
+
+        /* Modern Studio Bento Grid */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            width: 100%;
+            max-width: 710px;
+        }
+
+        .bento-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 0.8rem 1.05rem;
+            text-align: left;
+            cursor: pointer;
+            backdrop-filter: blur(28px) saturate(170%);
+            box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 0.65rem;
+        }
+        .bento-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .bento-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-hover);
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 24px 50px -12px rgba(99, 102, 241, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.25);
+        }
+        .bento-card:hover::before { opacity: 1; }
+        .bento-card:active { transform: scale(0.985); }
+
+        .bento-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .bento-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+        }
+        .tag-violet {
+            background: rgba(124, 58, 237, 0.18);
+            border: 1px solid rgba(139, 92, 246, 0.35);
+            color: #c4b5fd;
+        }
+        .tag-rose {
+            background: rgba(244, 63, 94, 0.18);
+            border: 1px solid rgba(251, 113, 133, 0.35);
+            color: #fecdd3;
+        }
+        .tag-emerald {
+            background: rgba(16, 185, 129, 0.18);
+            border: 1px solid rgba(52, 211, 153, 0.35);
+            color: #a7f3d0;
+        }
+        .tag-cyan {
+            background: rgba(6, 182, 212, 0.18);
+            border: 1px solid rgba(34, 211, 238, 0.35);
+            color: #a5f3fc;
+        }
+
+        .bento-meta-pill {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.55rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .bento-meta-pill.live {
+            color: #34d399;
+            border-color: rgba(52, 211, 153, 0.3);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        /* Widget Focus Body */
+        .widget-focus-body {
+            display: flex;
+            align-items: center;
+            gap: 1.1rem;
+            padding: 0.2rem 0;
+        }
+        .focus-dial-graphic {
+            position: relative;
+            width: 64px;
+            height: 64px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .progress-ring { transform: rotate(-90deg); }
+        .dial-center-text {
+            position: absolute;
+            font-family: var(--font-display);
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .widget-focus-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+        .bento-headline {
+            font-family: var(--font-display);
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--text-title);
+            letter-spacing: -0.01em;
+        }
+        .bento-mock-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.25rem 0.55rem;
+            border-radius: 8px;
+            font-size: 0.74rem;
+        }
+        .chip-time { font-weight: 700; color: #818cf8; }
+        .chip-label { color: var(--text-muted); }
+
+        /* Widget Reflection Body */
+        .widget-reflection-body {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+        .sparkline-container {
+            width: 100%;
+            height: 40px;
+            overflow: hidden;
+        }
+        .reflection-metrics-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 0.2rem;
+        }
+        .metric-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+        .metric-num {
+            font-family: var(--font-display);
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .metric-sub {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        /* Widget Agenda Body */
+        .widget-agenda-body {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+        .agenda-mini-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        .mini-agenda-item {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            font-size: 0.76rem;
+            color: var(--text-body);
+            padding: 0.25rem 0.45rem;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .mini-agenda-item.next {
+            background: rgba(16, 185, 129, 0.08);
+            border-left: 2px solid #10b981;
+        }
+        .mini-agenda-item.done {
+            opacity: 0.55;
+            text-decoration: line-through;
+        }
+        .item-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            flex-shrink: 0;
+        }
+        .item-dot.next {
+            background: #10b981;
+            box-shadow: 0 0 6px #10b981;
+        }
+        .item-dot.done { background: #64748b; }
+        .item-time {
+            font-weight: 700;
+            color: #ffffff;
+            font-size: 0.74rem;
+        }
+        .item-title {
+            color: var(--text-body);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Widget Capture Body */
+        .widget-capture-body {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .capture-preview-box {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 0.45rem 0.65rem;
+        }
+        .capture-check-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.76rem;
+        }
+        .check-box {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+            border: 1.5px solid var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .check-box.checked {
+            background: #06b6d4;
+            border-color: #06b6d4;
+            color: #08090c;
+        }
+        .check-text.struck {
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+        .capture-tags-row {
+            display: flex;
+            gap: 0.4rem;
+        }
+        .mini-tag {
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: #a5f3fc;
+            background: rgba(6, 182, 212, 0.12);
+            border: 1px solid rgba(6, 182, 212, 0.25);
+            padding: 0.12rem 0.45rem;
+            border-radius: 6px;
+        }
+
+        .bento-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 0.65rem;
+        }
+        .prompt-hint {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        .arrow-hint {
+            color: var(--text-muted);
+            transition: transform 0.2s;
+        }
+        .bento-card:hover .arrow-hint {
+            transform: translateX(3px);
+            color: #ffffff;
+        }
+
+        /* Specular Dynamic Spotlight on Glass Cards */
+        .bento-card::after, .task-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(380px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.08), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .bento-card:hover::after, .task-card:hover::after {
+            opacity: 1;
+        }
+
+        .bento-card-top,
+        .widget-focus-body,
+        .widget-reflection-body,
+        .widget-agenda-body,
+        .widget-capture-body,
+        .bento-card-footer,
+        .task-info-left,
+        .task-actions {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Conversational Rows (Studio Cinematic Stream) */
+        .chat-row {
+            display: flex;
+            gap: 0.9rem;
+            width: 100%;
+            animation: messageGlideIn 0.36s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .chat-row.user {
+            justify-content: flex-end;
+        }
+
+        @keyframes messageGlideIn {
+            0% { opacity: 0; transform: translateY(16px) scale(0.985); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .avatar-ring {
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-body);
+            margin-top: 0.2rem;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .avatar-ring:hover {
+            transform: scale(1.08) rotate(4deg);
+        }
+        .avatar-ring.bot {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: none;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+        }
+
+        .chat-body {
+            max-width: 82%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .msg-meta {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.68rem;
+            color: var(--text-faint);
+            letter-spacing: 0.02em;
+            padding: 0 0.15rem;
+        }
+        .msg-meta.user {
+            justify-content: flex-end;
+        }
+        .meta-sender {
+            font-family: var(--font-display);
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-size: 0.65rem;
+        }
+        .meta-sender.bot {
+            color: #818cf8;
+        }
+        .meta-sender.user {
+            color: #94a3b8;
+        }
+
+        .user-text-bubble {
+            background: linear-gradient(135deg, rgba(30, 36, 58, 0.8), rgba(20, 24, 40, 0.85));
+            border: 1px solid rgba(129, 140, 248, 0.22);
+            padding: 0.75rem 1.15rem;
+            border-radius: 16px 16px 4px 16px;
+            font-size: 0.94rem;
+            line-height: 1.55;
+            color: #f8fafc;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            transition: border-color 0.2s ease;
+        }
+        .user-text-bubble:hover {
+            border-color: rgba(129, 140, 248, 0.38);
+        }
+
+        .bot-text-block {
+            font-size: 0.96rem;
+            line-height: 1.65;
+            color: var(--text-body);
+            padding: 0.15rem 0;
+        }
+
+        /* Task Confirmation Card & Micro-Interactions */
+        .task-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+            padding: 0.9rem 1.1rem;
+            backdrop-filter: blur(16px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 0.35rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            flex-wrap: wrap;
+            position: relative;
+            overflow: hidden;
+        }
+        .task-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+        }
+
+        @keyframes taskCompleteRipple {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+            50% { transform: scale(1.02); box-shadow: 0 0 24px 6px rgba(16, 185, 129, 0.4); border-color: #10b981; }
+            100% { transform: scale(1); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); }
+        }
+        .task-card.completing {
+            animation: taskCompleteRipple 0.6s ease;
+            border-color: #10b981 !important;
+        }
+        .task-card.completing .task-headline {
+            text-decoration: line-through;
+            color: var(--text-faint) !important;
+            transition: all 0.3s ease;
+        }
+
+        .task-info-left {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            min-width: 200px;
+            flex: 1;
+        }
+        .task-icon-box {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--accent-soft);
+            color: var(--accent-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+        .task-card:hover .task-icon-box {
+            transform: scale(1.05);
+            box-shadow: 0 0 12px rgba(129, 140, 248, 0.3);
+        }
+        .task-headline {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: 0.96rem;
+            color: var(--text-title);
+        }
+        .task-schedule {
+            font-size: 0.8rem;
+            color: var(--accent-primary);
+            font-weight: 500;
+            margin-top: 0.15rem;
+        }
+
+        .task-actions { display: flex; gap: 0.45rem; flex-shrink: 0; }
+        .btn-action-pill {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-body);
+            border-radius: 8px;
+            padding: 0.4rem 0.75rem;
+            font-size: 0.78rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        .btn-action-pill:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--border-hover);
+            color: var(--text-title);
+            transform: translateY(-1px);
+        }
+        .btn-action-pill:active { transform: scale(0.96); }
+        .btn-action-pill.delete:hover {
+            color: var(--danger-color);
+            border-color: rgba(248, 113, 113, 0.3);
+            background: rgba(248, 113, 113, 0.08);
+        }
+        .btn-action-pill.success {
+            background: rgba(16, 185, 129, 0.18) !important;
+            border-color: #10b981 !important;
+            color: #34d399 !important;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Floating Input Dock (Raycast-Style Command Center) */
+        .dock-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, var(--bg-base) 70%, transparent);
+            padding: 0.8rem 1.5rem 1.3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.45rem;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .dock-quick-chips {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.45rem;
+            max-width: 760px;
+            width: 100%;
+            overflow-x: auto;
+            padding: 0 0.5rem 0.15rem;
+            pointer-events: auto;
+            scrollbar-width: none;
+        }
+        .dock-quick-chips::-webkit-scrollbar { display: none; }
+
+        .quick-chip {
+            background: rgba(20, 25, 44, 0.7);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            border-radius: 9999px;
+            padding: 0.26rem 0.7rem;
+            font-size: 0.74rem;
+            font-weight: 500;
+            cursor: pointer;
+            backdrop-filter: blur(16px);
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .quick-chip:hover {
+            background: rgba(30, 36, 62, 0.9);
+            border-color: var(--border-hover);
+            color: #ffffff;
+            transform: translateY(-1.5px);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+        }
+        .quick-chip:active { transform: scale(0.96); }
+        .quick-chip span {
+            color: var(--accent-primary);
+            font-size: 0.72rem;
+        }
+
+        .dock-pill {
+            width: 100%;
+            max-width: 760px;
+            background: var(--bg-dock);
+            border: 1px solid var(--border-subtle);
+            border-radius: 28px;
+            padding: 0.45rem 0.65rem 0.45rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: auto;
+        }
+        .dock-pill:focus-within {
+            border-color: var(--border-focus);
+            box-shadow: 0 18px 48px -8px rgba(99, 102, 241, 0.24), inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
+            transform: translateY(-2px);
+        }
+
+        .input-prompt {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-title);
+            font-size: 0.96rem;
+            outline: none;
+            padding: 0.5rem 0;
+            font-family: var(--font-body);
+        }
+        .input-prompt::placeholder { color: var(--text-faint); }
+
+        .btn-dock-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-out);
+        }
+        .btn-dock-icon:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-title);
+            transform: scale(1.05);
+        }
+
+        .dock-right-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .kbd-pill {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--text-faint);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0.18rem 0.4rem;
+            border-radius: 5px;
+            letter-spacing: 0.03em;
+            user-select: none;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .btn-dock-send {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: var(--accent-primary);
+            color: #0b0c10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(129, 140, 248, 0.35);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-dock-send:hover {
+            background: #a5b4fc;
+            transform: scale(1.06);
+            box-shadow: 0 6px 20px rgba(129, 140, 248, 0.5);
+        }
+        .btn-dock-send:active { transform: scale(0.95); }
+
+        .dock-footer-text {
+            font-size: 0.72rem;
+            color: var(--text-faint);
+            letter-spacing: 0.01em;
+            opacity: 0.85;
+        }
+
+        /* Subtle Thinking Indicator */
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 0.4rem 0;
+        }
+        .typing-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            animation: dotBlink 1.4s infinite ease-in-out both;
+        }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes dotBlink {
+            0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+            40% { opacity: 1; transform: scale(1.1); }
+        }
+
+        /* Pairing Modal */
+        .modal-mask {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        .modal-window {
+            background: #11131a;
+            border: 1px solid var(--border-medium);
+            border-radius: 20px;
+            padding: 2.25rem;
+            max-width: 420px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+            animation: modalPop 0.3s var(--ease-out);
+        }
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Real-Time Reminder Alert Modal */
+        .reminder-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 7, 15, 0.78);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reminder-modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .reminder-modal {
+            background: linear-gradient(135deg, rgba(26, 32, 58, 0.96), rgba(16, 20, 36, 0.98));
+            border: 1px solid rgba(129, 140, 248, 0.35);
+            box-shadow: 0 24px 64px -12px rgba(0, 0, 0, 0.75), 0 0 32px rgba(129, 140, 248, 0.22);
+            border-radius: 20px;
+            padding: 1.85rem 2.2rem;
+            width: 90%;
+            max-width: 460px;
+            text-align: center;
+            transform: scale(0.92) translateY(12px);
+            transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .reminder-modal-overlay.active .reminder-modal {
+            transform: scale(1) translateY(0);
+        }
+        .reminder-modal-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            background: rgba(244, 63, 94, 0.18);
+            border: 1px solid rgba(244, 63, 94, 0.4);
+            color: #fca5a5;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.38rem 0.9rem;
+            border-radius: 999px;
+            margin-bottom: 1.1rem;
+            animation: pulse-reminder-badge 2s infinite;
+        }
+        @keyframes pulse-reminder-badge {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.45); }
+            50% { box-shadow: 0 0 0 8px rgba(244, 63, 94, 0); }
+        }
+        .reminder-modal-title {
+            font-family: var(--font-display);
+            font-size: 1.55rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.45rem;
+            line-height: 1.3;
+        }
+        .reminder-modal-time {
+            font-size: 0.92rem;
+            color: var(--accent-primary);
+            margin-bottom: 1.6rem;
+            font-weight: 500;
+        }
+        .reminder-modal-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+        .btn-modal-primary {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 0.85rem 1.25rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+        }
+        .btn-modal-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+        }
+        .modal-btn-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.65rem;
+        }
+        .btn-modal-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-body);
+            border-radius: 12px;
+            padding: 0.75rem;
+            font-size: 0.88rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn-modal-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+        }
+        /* Toast Banner */
+        .toast-banner {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(20, 25, 45, 0.94);
+            border: 1px solid var(--border-medium);
+            backdrop-filter: blur(16px);
+            color: #fff;
+            padding: 0.75rem 1.3rem;
+            border-radius: 12px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+            z-index: 100000;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            pointer-events: none;
+        }
+        .toast-banner.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-spectrum"></div>
+
+    <!-- Sidebar -->
+    <aside id="app-sidebar">
+        <div class="sidebar-header">
+            <div class="app-brand-studio">
+                <div class="brand-mark-group">
+                    <span class="brand-wordmark">PLANNER</span>
+                    <span class="brand-sub-badge">AI</span>
+                    <div class="brand-status-jewel" title="Local Offline Engine Active"></div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-new-chat" onclick="resetConversation()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>New conversation</span>
+        </button>
+
+        <div class="nav-list">
+            <div class="nav-heading">Workspace</div>
+            <div class="nav-link active" onclick="resetConversation()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>Assistant</span>
+            </div>
+            <div class="nav-link" onclick="sendQuery('Show my pending reminders')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                <span>Agenda</span>
+            </div>
+            <div class="nav-link" onclick="sendQuery('Analyze my day')">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+                <span>Reflection</span>
+            </div>
+
+            <div class="nav-heading">Network Mesh</div>
+            <div class="nav-link" onclick="openPairing()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="2"></circle>
+                    <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"></path>
+                </svg>
+                <span id="sidebar-mesh-status">0 Discovered</span>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="profile-card" onclick="openPairing()">
+                <div>
+                    <div class="profile-title" id="profile-code">PLAN-....</div>
+                    <div class="profile-subtitle">
+                        <span style="display:inline-block; width:5px; height:5px; border-radius:50%; background:var(--success-color);"></span>
+                        <span>Private Mesh Active</span>
+                    </div>
+                </div>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Workspace Area -->
+    <main>
+        <header>
+            <div class="header-left">
+                <button class="btn-sidebar-toggle" id="btn-header-toggle-sidebar" onclick="toggleSidebar()" title="Toggle sidebar (Ctrl+B)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="9" y1="3" x2="9" y2="21"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="header-right" style="display: flex; gap: 0.5rem; align-items: center;">
+                <button class="btn-mesh-sync" onclick="exportVolunteerChat()" title="Export local conversation dataset to volunteer for AI training">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <span>Volunteer Data</span>
+                </button>
+                <button class="btn-mesh-sync" onclick="triggerSyncPass()">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <polyline points="1 20 1 14 7 14"></polyline>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                    </svg>
+                    <span id="mesh-sync-label">Sync</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Chat Viewport (Full-width for far-right edge scrollbar) -->
+        <div class="chat-viewport" id="chat-viewport">
+            <div class="chat-container" id="chat-stream">
+            <!-- Hero Welcome Bento Grid -->
+            <div class="hero-section" id="hero-welcome">
+                <div class="hero-header-badge">
+                    <span class="badge-glow-dot"></span>
+                    <span>INTELLIGENT LOCAL WORKSPACE</span>
+                </div>
+                <h1 class="hero-prompt">What would you like to plan today?</h1>
+                <p class="hero-desc">Your private, offline assistant for focus sprints, smart scheduling, and daily reflection.</p>
+
+                <div class="bento-grid">
+                    <!-- Widget 1: Focus Sprint -->
+                    <div class="bento-card" onclick="sendQuery('Remind me to finish homework at 7pm')">
+                        <div class="bento-card-top">
+                            <span class="bento-tag tag-violet">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                Focus Sprint
+                            </span>
+                            <span class="bento-meta-pill">25m block</span>
+                        </div>
+                        
+                        <div class="widget-focus-body">
+                            <div class="focus-dial-graphic">
+                                <svg class="progress-ring" width="64" height="64" viewBox="0 0 72 72">
+                                    <defs>
+                                        <linearGradient id="focusGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#818cf8"/>
+                                            <stop offset="100%" stop-color="#c084fc"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <circle stroke="rgba(255,255,255,0.08)" stroke-width="5" fill="transparent" r="30" cx="36" cy="36"/>
+                                    <circle stroke="url(#focusGradient)" stroke-width="5" stroke-linecap="round" fill="transparent" r="30" cx="36" cy="36" stroke-dasharray="188.4" stroke-dashoffset="47"/>
+                                </svg>
+                                <div class="dial-center-text">75%</div>
+                            </div>
+                            <div class="widget-focus-info">
+                                <div class="bento-headline">Homework & study sprint</div>
+                                <div class="bento-mock-chip">
+                                    <span class="chip-time">7:00 PM</span>
+                                    <span class="chip-label">High Focus Block</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bento-card-footer">
+                            <span class="prompt-hint">"Remind me to finish homework at 7pm"</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-hint"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Widget 2: Daily Reflection -->
+                    <div class="bento-card" onclick="sendQuery('Analyze my day and suggest tomorrow\'s tasks')">
+                        <div class="bento-card-top">
+                            <span class="bento-tag tag-rose">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                Daily Reflection
+                            </span>
+                            <span class="bento-meta-pill live">88% Score</span>
+                        </div>
+
+                        <div class="widget-reflection-body">
+                            <div class="sparkline-container">
+                                <svg width="100%" height="40" viewBox="0 0 160 40" preserveAspectRatio="none">
+                                    <defs>
+                                        <linearGradient id="sparkGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" stop-color="rgba(244, 63, 94, 0.4)"/>
+                                            <stop offset="100%" stop-color="rgba(244, 63, 94, 0.0)"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <path d="M0,34 Q30,28 50,16 T100,6 T130,20 T160,10 L160,40 L0,40 Z" fill="url(#sparkGradient)"/>
+                                    <path d="M0,34 Q30,28 50,16 T100,6 T130,20 T160,10" fill="none" stroke="#f43f5e" stroke-width="2.5" stroke-linecap="round"/>
+                                    <circle cx="100" cy="6" r="3.5" fill="#f43f5e" stroke="#ffffff" stroke-width="1.5"/>
+                                </svg>
+                            </div>
+                            <div class="reflection-metrics-row">
+                                <div class="metric-item">
+                                    <span class="metric-num">4 of 5</span>
+                                    <span class="metric-sub">Completed</span>
+                                </div>
+                                <div class="metric-item">
+                                    <span class="metric-num">2:00 PM</span>
+                                    <span class="metric-sub">Peak Flow</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bento-card-footer">
+                            <span class="prompt-hint">"Analyze my day and suggest tomorrow's tasks"</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-hint"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Widget 3: Active Smart Agenda -->
+                    <div class="bento-card" onclick="sendQuery('What are all my pending reminders?')">
+                        <div class="bento-card-top">
+                            <span class="bento-tag tag-emerald">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                Smart Agenda
+                            </span>
+                            <span class="bento-meta-pill">3 Scheduled</span>
+                        </div>
+
+                        <div class="widget-agenda-body">
+                            <div class="agenda-mini-list">
+                                <div class="mini-agenda-item done">
+                                    <span class="item-dot done"></span>
+                                    <span class="item-time">10:00 AM</span>
+                                    <span class="item-title">Morning standup & tasks</span>
+                                </div>
+                                <div class="mini-agenda-item next">
+                                    <span class="item-dot next"></span>
+                                    <span class="item-time">3:30 PM</span>
+                                    <span class="item-title">Review sprint deliverables</span>
+                                </div>
+                                <div class="mini-agenda-item">
+                                    <span class="item-dot"></span>
+                                    <span class="item-time">7:00 PM</span>
+                                    <span class="item-title">Deep focus session</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bento-card-footer">
+                            <span class="prompt-hint">"What are all my pending reminders?"</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-hint"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Widget 4: Quick Capture & Errands -->
+                    <div class="bento-card" onclick="sendQuery('Remind me to buy groceries tomorrow at 5pm')">
+                        <div class="bento-card-top">
+                            <span class="bento-tag tag-cyan">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+                                Quick Capture
+                            </span>
+                            <span class="bento-meta-pill">Natural Time</span>
+                        </div>
+
+                        <div class="widget-capture-body">
+                            <div class="capture-preview-box">
+                                <div class="capture-check-row">
+                                    <div class="check-box checked">
+                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </div>
+                                    <span class="check-text struck">Pick up fresh groceries</span>
+                                </div>
+                                <div class="capture-check-row">
+                                    <div class="check-box"></div>
+                                    <span class="check-text">Car maintenance at 5:00 PM</span>
+                                </div>
+                            </div>
+                            <div class="capture-tags-row">
+                                <span class="mini-tag">Offline BoltDB</span>
+                                <span class="mini-tag">Encrypted CRDT</span>
+                            </div>
+                        </div>
+
+                        <div class="bento-card-footer">
+                            <span class="prompt-hint">"Remind me to buy groceries tomorrow at 5pm"</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-hint"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Floating Input Dock (Raycast-Style Command Center) -->
+        <div class="dock-container">
+            <div class="dock-quick-chips">
+                <button class="quick-chip" onclick="sendQuery('Analyze my screentime')"><span>✦</span> Screentime Audit</button>
+                <button class="quick-chip" onclick="sendQuery('Remind me to finish homework at 7pm')"><span>✦</span> Focus Sprint</button>
+                <button class="quick-chip" onclick="sendQuery('Analyze my day')"><span>✦</span> Daily Reflection</button>
+                <button class="quick-chip" onclick="sendQuery('What are all my pending reminders?')"><span>✦</span> Pending Agenda</button>
+            </div>
+            <div class="dock-pill">
+                <button class="btn-dock-icon" title="Upload or Paste Screentime Screenshot (Ctrl+V)" onclick="triggerImageUpload()">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <polyline points="21 15 16 10 5 21"></polyline>
+                    </svg>
+                </button>
+                <input type="file" id="screentime-file-input" accept="image/*" style="display:none" onchange="onFileSelected(event)">
+
+                <button class="btn-dock-icon" title="Daily Insights" onclick="sendQuery('Analyze my day')">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                    </svg>
+                </button>
+                <input type="text" class="input-prompt" id="prompt-input" placeholder="Ask Planner, schedule, or drop screentime..." autocomplete="off" onkeydown="if(event.key==='Enter') submitPrompt()">
+                <div class="dock-right-actions">
+                    <span class="kbd-pill">↵ Enter</span>
+                    <button class="btn-dock-send" title="Send" onclick="submitPrompt()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="19" x2="12" y2="5"></line>
+                            <polyline points="5 12 12 5 19 12"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="dock-footer-text">Encrypted peer-to-peer synchronization active. Zero cloud logs.</div>
+        </div>
+    </main>
+
+    <!-- Pairing Modal -->
+    <div class="modal-mask" id="pairing-modal">
+        <div class="modal-window">
+            <div style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: #fff;">Local Mesh Security</div>
+            <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); padding: 1.5rem; border-radius: 14px; text-align: center;">
+                <div style="font-family: var(--font-display); font-size: 1.45rem; font-weight: 800; letter-spacing: 2px; color: var(--accent-primary);" id="modal-pairing-code">PLAN-....</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.45;">
+                    Enter this secret key on your phone to link your devices with peer-to-peer AES-256-GCM encryption.
+                </div>
+            </div>
+            <div style="display: flex; justify-content: flex-end;">
+                <button class="btn-action-pill" style="background: var(--accent-primary); color: #0a0b0e; border: none; padding: 0.6rem 1.2rem; font-weight: 600;" onclick="closePairing()">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Real-Time Reminder Alert Modal -->
+    <div id="reminder-modal-overlay" class="reminder-modal-overlay">
+        <div class="reminder-modal">
+            <div class="reminder-modal-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                Reminder Due Now
+            </div>
+            <h2 id="modal-task-title" class="reminder-modal-title">Task Name</h2>
+            <p id="modal-task-time" class="reminder-modal-time">Scheduled Time</p>
+            <div class="reminder-modal-actions">
+                <button class="btn-modal-primary" onclick="completeActiveModalReminder()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Mark Completed
+                </button>
+                <div class="modal-btn-row">
+                    <button class="btn-modal-secondary" onclick="snoozeActiveModalReminder(5)">
+                        ⏰ Snooze 5m
+                    </button>
+                    <button class="btn-modal-secondary" onclick="dismissActiveModalReminder()">
+                        Dismiss
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UI Toast Notification -->
+    <div id="app-toast" class="toast-banner"></div>
+
+    <script>
+        let hasStartedConversation = false;
+
+        async function initialize() {
+            try {
+                if (localStorage.getItem('planner_sidebar_collapsed') === '1') {
+                    document.body.classList.add('sidebar-collapsed');
+                }
+            } catch (e) {}
+            await updateStatus();
+            await loadChatHistory();
+            setInterval(updateStatus, 5000);
+            initRealtimeReminders();
+        }
+
+        async function updateStatus() {
+            try {
+                const res = await fetch('/api/status');
+                const data = await res.json();
+                document.getElementById('profile-code').textContent = data.pairing_code;
+                document.getElementById('modal-pairing-code').textContent = data.pairing_code;
+                document.getElementById('sidebar-mesh-status').textContent = `${data.peers_count} Discovered`;
+            } catch (err) {}
+        }
+
+        async function loadChatHistory() {
+            try {
+                const res = await fetch('/api/chat');
+                const chats = await res.json();
+                if (chats && chats.length > 0) {
+                    hasStartedConversation = true;
+                    const hero = document.getElementById('hero-welcome');
+                    if (hero) hero.remove();
+                    for (const msg of chats) {
+                        const timeStr = msg.timestamp ? formatTime(new Date(msg.timestamp)) : formatTime();
+                        if (msg.role === 'user') {
+                            renderUserMessage(msg.content, timeStr);
+                        } else {
+                            renderBotResponse({ reply: msg.content, action: msg.action }, timeStr);
+                        }
+                    }
+                    scrollChat();
+                }
+            } catch (err) {
+                console.error("Could not load chat history:", err);
+            }
+        }
+
+        function getHeroHTML() {
+            return `
+                <div class="hero-section" id="hero-welcome">
+                    <div class="hero-header-badge">
+                        <span class="badge-glow-dot"></span>
+                        <span>INTELLIGENT LOCAL WORKSPACE</span>
+                    </div>
+                    <h1 class="hero-prompt">What would you like to plan today?</h1>
+                    <p class="hero-desc">Your private, offline assistant for focus sprints, smart scheduling, and daily reflection.</p>
+
+                    <div class="bento-grid">
+                        <!-- Widget 1: Focus Sprint -->
+                        <div class="bento-card" onclick="sendQuery('Remind me to finish homework at 7pm')">
+                            <div class="bento-card-top">
+                                <span class="bento-tag tag-violet">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                    Focus Sprint
+                                </span>
+                                <span class="bento-meta-pill">25m block</span>
+                            </div>
+                            
+                            <div class="widget-focus-body">
+                                <div class="focus-dial-graphic">
+                                    <svg class="progress-ring" width="64" height="64" viewBox="0 0 72 72">
+                                        <defs>
+                                            <linearGradient id="focusGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                <stop offset="0%" stop-color="#818cf8"/>
+                                                <stop offset="100%" stop-color="#c084fc"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <circle stroke="rgba(255,255,255,0.08)" stroke-width="5" fill="transparent" r="30" cx="36" cy="36"/>
+                                        <circle stroke="url(#focusGradient2)" stroke-width="5" stroke-linecap="round" fill="transparent" r="30" cx="36" cy="36" stroke-dasharray="188.4" stroke-dashoffset="47"/>
+                                    </svg>
+                                    <div class="dial-center-text">75%</div>
+                                </div>
+                                <div class="widget-focus-info">
+                                    <div class="bento-headline">Homework & study sprint</div>
+                                    <div class="bento-mock-chip">
+                                        <span class="chip-time">7:00 PM</span>
+                                        <span class="chip-label">High Focus Block</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bento-card-footer">
+                                <span class="prompt-hint">"Remind me to finish homework at 7pm"</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-hint"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </div>
+                        </div>
+
+                        <!-- Widget 2: Daily Reflection -->
+                        <div class="bento-card" onclick="sendQuery('Analyze my day and suggest tomorrow\\'s tasks')">
+                            <div class="bento-card-top">
+                                <span class="bento-tag tag-rose">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                    Daily Reflection
+                                </span>
+                                <span class="bento-meta-pill live">88% Score</span>
+                            </div>
+
+                            <div class="widget-reflection-body">
+                                <div class="sparkline-container">
+                                    <svg width="100%" height="40" viewBox="0 0 160 40" preserveAspectRatio="none">
+                                        <defs>
+                                            <linearGradient id="sparkGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                <stop offset="0%" stop-color="rgba(244, 63, 94, 0.4)"/>
+                                                <stop offset="0%" stop-color="rgba(244, 63, 94, 0.0)"/>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d="M0,34 Q30,28 50,16 T100,6 T130,20 T160,10 L160,40 L0,40 Z" fill="url(#sparkGradient2)"/>
+                                        <path d="M0,34 Q30,28 50,16 T100,6 T130,20 T160,10" fill="none" stroke="#f43f5e" stroke-width="2.5" stroke-linecap="round"/>
+                                        <circle cx="100" cy="6" r="3.5" fill="#f43f5e" stroke="#ffffff" stroke-width="1.5"/>
+                                    </svg>
+                                </div>
+                                <div class="reflection-metrics-row">
+                                    <div class="metric-item">
+                                        <span class="metric-num">4 of 5</span>
+                                        <span class="metric-sub">Completed</span>
+                                    </div>
+                                    <div class="metric-item">
+                                        <span class="metric-num">2:00 PM</span>
+                                        <span class="metric-sub">Peak Flow</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bento-card-footer">
+                                <span class="prompt-hint">"Analyze my day and suggest tomorrow's tasks"</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-hint"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </div>
+                        </div>
+
+                        <!-- Widget 3: Active Smart Agenda -->
+                        <div class="bento-card" onclick="sendQuery('What are all my pending reminders?')">
+                            <div class="bento-card-top">
+                                <span class="bento-tag tag-emerald">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                    Smart Agenda
+                                </span>
+                                <span class="bento-meta-pill">3 Scheduled</span>
+                            </div>
+
+                            <div class="widget-agenda-body">
+                                <div class="agenda-mini-list">
+                                    <div class="mini-agenda-item done">
+                                        <span class="item-dot done"></span>
+                                        <span class="item-time">10:00 AM</span>
+                                        <span class="item-title">Morning standup & tasks</span>
+                                    </div>
+                                    <div class="mini-agenda-item next">
+                                        <span class="item-dot next"></span>
+                                        <span class="item-time">3:30 PM</span>
+                                        <span class="item-title">Review sprint deliverables</span>
+                                    </div>
+                                    <div class="mini-agenda-item">
+                                        <span class="item-dot"></span>
+                                        <span class="item-time">7:00 PM</span>
+                                        <span class="item-title">Deep focus session</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bento-card-footer">
+                                <span class="prompt-hint">"What are all my pending reminders?"</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-hint"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </div>
+                        </div>
+
+                        <!-- Widget 4: Quick Capture & Errands -->
+                        <div class="bento-card" onclick="sendQuery('Remind me to buy groceries tomorrow at 5pm')">
+                            <div class="bento-card-top">
+                                <span class="bento-tag tag-cyan">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+                                    Quick Capture
+                                </span>
+                                <span class="bento-meta-pill">Natural Time</span>
+                            </div>
+
+                            <div class="widget-capture-body">
+                                <div class="capture-preview-box">
+                                    <div class="capture-check-row">
+                                        <div class="check-box checked">
+                                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                                        </div>
+                                        <span class="check-text struck">Pick up fresh groceries</span>
+                                    </div>
+                                    <div class="capture-check-row">
+                                        <div class="check-box"></div>
+                                        <span class="check-text">Car maintenance at 5:00 PM</span>
+                                    </div>
+                                </div>
+                                <div class="capture-tags-row">
+                                    <span class="mini-tag">Offline BoltDB</span>
+                                    <span class="mini-tag">Encrypted CRDT</span>
+                                </div>
+                            </div>
+
+                            <div class="bento-card-footer">
+                                <span class="prompt-hint">"Remind me to buy groceries tomorrow at 5pm"</span>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="arrow-hint"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function resetConversation() {
+            try {
+                await fetch('/api/chat', { method: 'DELETE' });
+            } catch (err) {}
+            hasStartedConversation = false;
+            const container = document.getElementById('chat-stream');
+            container.innerHTML = getHeroHTML();
+        }
+
+        function sendQuery(text) {
+            document.getElementById('prompt-input').value = text;
+            submitPrompt();
+        }
+
+        let isProcessingChat = false;
+
+        async function exportVolunteerChat() {
+            try {
+                showToast("Preparing offline conversation dataset...");
+                const res = await fetch('/api/chat');
+                const chats = await res.json();
+
+                if (!Array.isArray(chats) || chats.length === 0) {
+                    showToast("No chat records found to export.");
+                    return;
+                }
+
+                // Structure into standard training dataset format
+                const dataset = {
+                    project: "PlannerBot Sovereign Cognitive Engine",
+                    version: "0.3.0",
+                    exported_at: new Date().toISOString(),
+                    privacy_notice: "All conversations are stored 100% on your device in your private local ledger. This file was created on-demand for users wishing to voluntarily contribute training data to fine-tune future open-source models.",
+                    total_turns: chats.length,
+                    conversations: chats.map(c => ({
+                        role: c.role,
+                        content: c.content,
+                        action: c.action || "chat",
+                        timestamp: c.timestamp
+                    }))
+                };
+
+                const blob = new Blob([JSON.stringify(dataset, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `plannerbot_volunteer_chat_${new Date().toISOString().slice(0,10)}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                showToast("Chat exported! You can share this file if you wish to volunteer training data.");
+            } catch (err) {
+                console.error("Export chat error:", err);
+                showToast("Failed to export chat data: " + err.message);
+            }
+        }
+
+        async function submitPrompt() {
+            if (isProcessingChat) return;
+
+            const input = document.getElementById('prompt-input');
+            const sendBtn = document.querySelector('.btn-dock-send');
+            const query = input.value.trim();
+            if (!query) return;
+
+            isProcessingChat = true;
+            input.value = '';
+            input.disabled = true;
+            if (sendBtn) {
+                sendBtn.disabled = true;
+                sendBtn.style.opacity = '0.4';
+                sendBtn.style.cursor = 'not-allowed';
+            }
+
+            if (!hasStartedConversation) {
+                hasStartedConversation = true;
+                const hero = document.getElementById('hero-welcome');
+                if (hero) hero.remove();
+            }
+
+            renderUserMessage(query);
+            const typingId = renderTypingIndicator();
+
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: query })
+                });
+                const data = await res.json();
+                removeTypingIndicator(typingId);
+                renderBotResponse(data);
+            } catch (err) {
+                removeTypingIndicator(typingId);
+                renderBotResponse({ reply: "Connection with the local engine was interrupted. Please ensure the backend is running." });
+            } finally {
+                isProcessingChat = false;
+                input.disabled = false;
+                if (sendBtn) {
+                    sendBtn.disabled = false;
+                    sendBtn.style.opacity = '1';
+                    sendBtn.style.cursor = 'pointer';
+                }
+                input.focus();
+                scrollChat();
+            }
+        }
+
+        function formatTime(d = new Date()) {
+            return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+        }
+
+        function renderUserMessage(text, time) {
+            const container = document.getElementById('chat-stream');
+            const row = document.createElement('div');
+            row.className = 'chat-row user';
+            const timeStr = time || formatTime();
+            row.innerHTML = `
+                <div class="chat-body">
+                    <div class="msg-meta user">
+                        <span class="meta-sender user">YOU</span>
+                        <span>•</span>
+                        <span>${timeStr}</span>
+                    </div>
+                    <div class="user-text-bubble">${sanitize(text)}</div>
+                </div>
+            `;
+            container.appendChild(row);
+        }
+
+        function renderTypingIndicator() {
+            const container = document.getElementById('chat-stream');
+            const id = 'typing-' + Date.now();
+            const row = document.createElement('div');
+            row.className = 'chat-row';
+            row.id = id;
+            row.innerHTML = `
+                <div class="avatar-ring bot">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                    </svg>
+                </div>
+                <div class="chat-body">
+                    <div class="typing-indicator">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(row);
+            scrollChat();
+            return id;
+        }
+
+        function removeTypingIndicator(id) {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+        }
+
+        function renderBotResponse(data, time) {
+            const container = document.getElementById('chat-stream');
+            const row = document.createElement('div');
+            row.className = 'chat-row';
+            const timeStr = time || formatTime();
+
+            let cardHTML = '';
+            if (data.action === 'reminder_created' && data.data) {
+                const r = data.data;
+                const fireDate = new Date(r.fire_at);
+                const timeString = fireDate.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+                cardHTML = `
+                    <div class="task-card">
+                        <div class="task-info-left">
+                            <div class="task-icon-box">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="task-headline">${sanitize(r.task)}</div>
+                                <div class="task-schedule">Scheduled for ${timeString}</div>
+                            </div>
+                        </div>
+                        <div class="task-actions">
+                            <button class="btn-action-pill" onclick="markCompleted('${r.id}', this)">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Complete</span>
+                            </button>
+                            <button class="btn-action-pill delete" onclick="removeTask('${r.id}', this)">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else if (data.action === 'list' && Array.isArray(data.data) && data.data.length > 0) {
+                cardHTML = `
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.4rem;">
+                        ${data.data.map(r => {
+                            const date = new Date(r.fire_at);
+                            const timeStr2 = date.toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+                            return `
+                                <div class="task-card">
+                                    <div class="task-info-left">
+                                        <div>
+                                            <div class="task-headline">${sanitize(r.task)}</div>
+                                            <div class="task-schedule">${timeStr2}</div>
+                                        </div>
+                                    </div>
+                                    <div class="task-actions">
+                                        <button class="btn-action-pill" onclick="markCompleted('${r.id}', this)">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                            <span>Done</span>
+                                        </button>
+                                        <button class="btn-action-pill delete" onclick="removeTask('${r.id}', this)">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            } else if (data.action === 'analysis' && data.data) {
+                cardHTML = `
+                    <div class="stoic-debrief-card" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 1.25rem; margin-top: 0.5rem; backdrop-filter: blur(28px); box-shadow: 0 16px 40px -10px rgba(0,0,0,0.45);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem;">
+                            <span class="bento-tag tag-violet">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                3-Part Stoic Debrief
+                            </span>
+                            <span class="bento-tag tag-emerald" style="font-weight: 700; text-transform: none; letter-spacing: normal;">
+                                ${Math.round(data.data.elastic_score || 100)}% Consistency • Never Miss Twice
+                            </span>
+                        </div>
+
+                        <!-- 3 Stoic Pillars -->
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-bottom: 0.95rem;">
+                            <div style="background: rgba(16,185,129,0.06); border: 1px solid rgba(52,211,153,0.25); border-radius: 10px; padding: 0.75rem;">
+                                <div style="font-size: 0.7rem; font-weight: 700; color: #34d399; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">✦ The Win</div>
+                                <div style="font-size: 0.82rem; color: var(--text-title); line-height: 1.35;">${sanitize(data.data.win || 'Committed to daily task execution')}</div>
+                            </div>
+                            <div style="background: rgba(244,63,94,0.06); border: 1px solid rgba(251,113,133,0.25); border-radius: 10px; padding: 0.75rem;">
+                                <div style="font-size: 0.7rem; font-weight: 700; color: #fb7185; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">✦ The Friction</div>
+                                <div style="font-size: 0.82rem; color: var(--text-title); line-height: 1.35;">${sanitize(data.data.friction || 'Task resistance resolved')}</div>
+                            </div>
+                            <div style="background: rgba(168,85,247,0.06); border: 1px solid rgba(192,132,252,0.25); border-radius: 10px; padding: 0.75rem;">
+                                <div style="font-size: 0.7rem; font-weight: 700; color: #c084fc; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">✦ The Keystone</div>
+                                <div style="font-size: 0.82rem; color: var(--text-title); line-height: 1.35;">${sanitize(data.data.keystone || 'Protect morning deep work block')}</div>
+                            </div>
+                        </div>
+
+                        <!-- Rule of Three Tomorrow Schedule Suggestions -->
+                        <div style="font-size: 0.74rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.45rem;">Rule of Three Schedule Recommendations</div>
+                        <div style="display: flex; flex-direction: column; gap: 0.45rem;">
+                            ${(data.data.suggestions || []).map(s => `
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.55rem 0.75rem; background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: 8px;">
+                                    <div>
+                                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                            <span style="font-weight: 600; font-size: 0.86rem; color: var(--text-title);">${sanitize(s.task)}</span>
+                                            ${s.category ? `<span style="font-size: 0.65rem; padding: 0.1rem 0.4rem; border-radius: 4px; background: rgba(255,255,255,0.06); color: var(--accent-primary);">${sanitize(s.category)}</span>` : ''}
+                                        </div>
+                                        <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.15rem;">${s.suggested_time} • ${sanitize(s.reason)}</div>
+                                    </div>
+                                    <button class="btn-action-pill" onclick="scheduleTask('${sanitize(s.task)}', '${s.suggested_time}', this)">
+                                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                        <span>Add</span>
+                                    </button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else if (data.action === 'briefing' && data.data) {
+                const b = data.data;
+                cardHTML = `
+                    <div class="briefing-card" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 1.25rem; margin-top: 0.5rem; backdrop-filter: blur(28px); box-shadow: 0 16px 40px -10px rgba(0,0,0,0.45);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem;">
+                            <span class="bento-tag tag-cyan">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                Executive State Briefing
+                            </span>
+                            <span class="bento-tag tag-emerald" style="font-weight: 700; text-transform: none;">
+                                ${sanitize(b.date)}
+                            </span>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-bottom: 0.9rem;">
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.7rem; text-align: center;">
+                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem;">Yesterday</div>
+                                <div style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: #34d399;">${b.yesterday_done} Done</div>
+                                <div style="font-size: 0.68rem; color: var(--text-muted);">${b.yesterday_missed} Missed</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.7rem; text-align: center;">
+                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem;">Today's Agenda</div>
+                                <div style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: #fff;">${(b.today_pending && b.today_pending.length) || 0} Tasks</div>
+                                <div style="font-size: 0.68rem; color: var(--text-muted);">Active Scheduled</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.7rem; text-align: center;">
+                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem;">Peak Focus</div>
+                                <div style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: #818cf8;">${sanitize(b.peak_focus_hours || '09:00 - 11:30')}</div>
+                                <div style="font-size: 0.68rem; color: var(--text-muted);">Circadian Flow</div>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 0.65rem 0.85rem; display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 0.6rem;">
+                                <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #818cf8;"></span>
+                                <span style="font-size: 0.8rem; color: var(--text-muted);">Keystone Objective:</span>
+                                <span style="font-size: 0.84rem; font-weight: 600; color: #fff;">${sanitize(b.prime_objective || 'Deep focus and steady execution')}</span>
+                            </div>
+                            <button class="btn-action-pill" onclick="sendQuery('What are all my pending reminders?')">
+                                <span>View Tasks</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else if (data.action === 'goal_breakdown' && data.data) {
+                const g = data.data;
+                cardHTML = `
+                    <div class="goal-roadmap-card" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 1.25rem; margin-top: 0.5rem; backdrop-filter: blur(28px); box-shadow: 0 16px 40px -10px rgba(0,0,0,0.45);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem;">
+                            <span class="bento-tag tag-violet">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg>
+                                Socratic Goal Roadmap
+                            </span>
+                            <span class="bento-tag tag-emerald" style="font-weight: 700; text-transform: none;">
+                                Rule of Three
+                            </span>
+                        </div>
+
+                        <div style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 0.25rem;">${sanitize(g.goal)}</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 0.95rem;">${sanitize(g.overview)}</div>
+
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            ${(g.milestones || []).map((m, idx) => `
+                                <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.65rem 0.85rem; background: ${idx === 0 ? 'rgba(129,140,248,0.08)' : 'rgba(255,255,255,0.02)'}; border: 1px solid ${idx === 0 ? 'rgba(129,140,248,0.35)' : 'var(--border-subtle)'}; border-radius: 10px;">
+                                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                        <span style="font-family: var(--font-display); font-size: 0.85rem; font-weight: 800; color: ${idx === 0 ? 'var(--accent-primary)' : 'var(--text-muted)'}; background: rgba(255,255,255,0.06); width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">${m.step}</span>
+                                        <div>
+                                            <div style="font-weight: 600; font-size: 0.86rem; color: #fff;">${sanitize(m.title)}</div>
+                                            <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.1rem;">${sanitize(m.rationale)} • Est: ${sanitize(m.duration_est)}</div>
+                                        </div>
+                                    </div>
+                                    ${idx === 0 ? `
+                                        <button class="btn-action-pill" style="background: var(--accent-primary); color: #0a0b0e; font-weight: 600;" onclick="scheduleTask('${sanitize(m.title)}', '10:00 AM', this)">
+                                            <span>+ Schedule Step 1</span>
+                                        </button>
+                                    ` : `
+                                        <span class="bento-meta-pill">${sanitize(m.duration_est)}</span>
+                                    `}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else if (data.action === 'screentime' && data.data) {
+                const r = data.data;
+                const trapScoreClass = r.dopamine_trap_score > 60 ? 'tag-rose' : (r.dopamine_trap_score > 30 ? 'tag-violet' : 'tag-emerald');
+                const focusColor = (r.focus_ratio || 0) >= 50 ? '#34d399' : '#f87171';
+                const hasHighTrap = r.dopamine_trap_score >= 60;
+
+                cardHTML = `
+                    <div class="screentime-card" style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 1.25rem; margin-top: 0.6rem; backdrop-filter: blur(28px); box-shadow: 0 16px 40px -10px rgba(0,0,0,0.45);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.9rem;">
+                            <span class="bento-tag tag-violet">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                Screentime &amp; Habit Audit
+                            </span>
+                            <span class="bento-tag ${trapScoreClass}" style="font-weight: 700; text-transform: none; letter-spacing: normal;">
+                                Trap Score: ${r.dopamine_trap_score || 0}/100
+                            </span>
+                        </div>
+
+                        ${hasHighTrap ? `
+                            <!-- Mindfulness Micro-Friction Gateway -->
+                            <div style="background: rgba(244,63,94,0.08); border: 1px solid rgba(244,63,94,0.25); border-radius: 12px; padding: 0.75rem 1rem; margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.85rem;">
+                                <div style="width: 16px; height: 16px; border-radius: 50%; background: #f43f5e; box-shadow: 0 0 12px #f43f5e; flex-shrink: 0;"></div>
+                                <div>
+                                    <div style="font-weight: 700; font-size: 0.76rem; color: #fca5a5; text-transform: uppercase; letter-spacing: 0.05em;">Mindfulness Micro-Friction Gateway</div>
+                                    <div style="font-size: 0.78rem; color: var(--text-body); margin-top: 0.15rem;">Pause and take one conscious breath. Is your current device usage intentional, or an unconscious reflex?</div>
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <!-- 3 Metric Tiles -->
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-bottom: 0.9rem;">
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.7rem; text-align: center;">
+                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem;">Total Screen</div>
+                                <div style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: #fff;">${sanitize(r.total_time_str || '0m')}</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.7rem; text-align: center;">
+                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem;">Focus Ratio</div>
+                                <div style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: ${focusColor};">${(r.focus_ratio || 0).toFixed(0)}%</div>
+                            </div>
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.7rem; text-align: center;">
+                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.2rem;">Annual Lost</div>
+                                <div style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: #fb7185;">${r.annual_lost_hours || 0} hrs</div>
+                            </div>
+                        </div>
+
+                        <!-- Focus vs Distraction Bar -->
+                        <div style="margin-bottom: 0.9rem;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--text-muted); margin-bottom: 0.35rem;">
+                                <span>Productive: <strong style="color: #34d399;">${sanitize(r.productive_time_str || '0m')}</strong></span>
+                                <span>Distraction: <strong style="color: #fb7185;">${sanitize(r.distraction_time_str || '0m')}</strong></span>
+                            </div>
+                            <div style="height: 6px; background: rgba(255,255,255,0.08); border-radius: 999px; overflow: hidden; display: flex;">
+                                <div style="width: ${Math.min(100, Math.max(0, r.focus_ratio || 0))}%; background: linear-gradient(90deg, #10b981, #06b6d4); transition: width 0.5s ease;"></div>
+                                <div style="flex: 1; background: linear-gradient(90deg, #f43f5e, #a855f7); opacity: 0.75;"></div>
+                            </div>
+                        </div>
+
+                        <!-- Top Apps List -->
+                        ${(r.apps && r.apps.length > 0) ? `
+                            <div style="font-size: 0.74rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.45rem;">Applications Captured</div>
+                            <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.9rem;">
+                                ${r.apps.slice(0, 5).map(app => `
+                                    <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.45rem 0.65rem; background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: 8px;">
+                                        <div style="display: flex; align-items: center; gap: 0.55rem;">
+                                            <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: ${app.is_dopamine_trap ? '#f43f5e' : (app.category === 'Productive' ? '#10b981' : '#06b6d4')};"></span>
+                                            <span style="font-weight: 500; font-size: 0.84rem; color: #fff;">${sanitize(app.app)}</span>
+                                            <span style="font-size: 0.68rem; padding: 0.12rem 0.45rem; border-radius: 4px; background: ${app.is_dopamine_trap ? 'rgba(244,63,94,0.18)' : 'rgba(255,255,255,0.06)'}; color: ${app.is_dopamine_trap ? '#fca5a5' : 'var(--text-muted)'};">${sanitize(app.category)}</span>
+                                        </div>
+                                        <span style="font-weight: 600; font-size: 0.82rem; color: var(--text-title);">${sanitize(app.duration_str)}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+
+                        <!-- Habit Recovery Scheduling Actions -->
+                        <div style="border-top: 1px solid var(--border-subtle); padding-top: 0.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: flex-end;">
+                            <button class="btn-action-pill" onclick="scheduleTask('Deep Focus Sprint (No Phone)', '9:00 AM', this)">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                <span>+ Focus Block (9 AM)</span>
+                            </button>
+                            <button class="btn-action-pill" onclick="scheduleTask('Digital Detox & Wind-down', '8:00 PM', this)">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+                                <span>+ Wind-down (8 PM)</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            row.innerHTML = `
+                <div class="avatar-ring bot">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path>
+                    </svg>
+                </div>
+                <div class="chat-body">
+                    <div class="msg-meta">
+                        <span class="meta-sender bot">PLANNER AI</span>
+                        <span>•</span>
+                        <span>${timeStr}</span>
+                    </div>
+                    <div class="bot-text-block">${formatText(data.reply || '')}</div>
+                    ${cardHTML}
+                </div>
+            `;
+            container.appendChild(row);
+            scrollChat();
+        }
+
+        async function markCompleted(id, btnEl) {
+            const card = btnEl ? btnEl.closest('.task-card') : null;
+            if (btnEl) {
+                btnEl.classList.add('success');
+                btnEl.innerHTML = `
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Done ✓</span>
+                `;
+            }
+            try {
+                await fetch(`/api/reminders/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fired: true })
+                });
+                showToast('Task marked as completed ✓');
+                if (card) {
+                    card.style.transition = 'all 0.35s ease';
+                    card.style.opacity = '0.35';
+                    card.style.textDecoration = 'line-through';
+                    setTimeout(() => card.remove(), 600);
+                }
+            } catch (e) {
+                showToast('Failed to update task');
+            }
+        }
+
+        async function removeTask(id, btnEl) {
+            const card = btnEl ? btnEl.closest('.task-card') : null;
+            if (card) {
+                card.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.92) translateY(6px)';
+                setTimeout(() => card.remove(), 320);
+            }
+            try {
+                await fetch(`/api/reminders/${id}`, { method: 'DELETE' });
+                showToast('Reminder deleted');
+            } catch (e) {
+                showToast('Failed to delete reminder');
+            }
+        }
+
+        async function scheduleTask(task, timeExpr, btnEl) {
+            if (btnEl) {
+                btnEl.classList.add('success');
+                btnEl.innerHTML = `
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>Added ✓</span>
+                `;
+            }
+            try {
+                await fetch('/api/reminders', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ task: task, time: "tomorrow at " + timeExpr })
+                });
+            } catch (e) {}
+            renderBotResponse({ reply: `Scheduled **${task}** for tomorrow at ${timeExpr}.` });
+        }
+
+        async function triggerSyncPass() {
+            const label = document.getElementById('mesh-sync-label');
+            label.textContent = "Syncing...";
+            try {
+                await fetch('/api/sync', { method: 'POST' });
+                label.textContent = "Synced";
+                setTimeout(() => label.textContent = "Sync", 2000);
+            } catch (e) { label.textContent = "Sync"; }
+        }
+
+        function openPairing() { document.getElementById('pairing-modal').style.display = 'flex'; }
+        function closePairing() { document.getElementById('pairing-modal').style.display = 'none'; }
+
+        function scrollChat() {
+            const viewport = document.getElementById('chat-viewport') || document.getElementById('chat-stream');
+            if (!viewport) return;
+            requestAnimationFrame(() => {
+                viewport.scrollTop = viewport.scrollHeight;
+            });
+        }
+
+        function toggleSidebar() {
+            document.body.classList.toggle('sidebar-collapsed');
+            const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+            try {
+                localStorage.setItem('planner_sidebar_collapsed', isCollapsed ? '1' : '0');
+            } catch (e) {}
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'b') {
+                e.preventDefault();
+                toggleSidebar();
+            }
+        });
+
+        function sanitize(str) {
+            if (!str) return '';
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function formatText(text) {
+            if (!text) return '';
+            let formatted = sanitize(text);
+            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            formatted = formatted.replace(/\n/g, '<br>');
+            return formatted;
+        }
+
+        // Dynamic Cursor Spotlight Tracking for Glass Cards
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.bento-card, .task-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        function triggerImageUpload() {
+            const input = document.getElementById('screentime-file-input');
+            if (input) input.click();
+        }
+
+        function onFileSelected(event) {
+            const file = event.target.files && event.target.files[0];
+            if (file) {
+                processImageFile(file);
+            }
+            event.target.value = '';
+        }
+
+        async function processImageFile(file) {
+            if (!file) return;
+
+            if (!hasStartedConversation) {
+                hasStartedConversation = true;
+                const hero = document.getElementById('hero-welcome');
+                if (hero) hero.remove();
+            }
+
+            renderUserMessage(`Analyzed screentime capture: ${file.name || 'screenshot.png'}`);
+            const typingId = renderTypingIndicator();
+
+            let ocrText = '';
+            if (typeof Tesseract !== 'undefined') {
+                try {
+                    const ret = await Tesseract.recognize(file, 'eng');
+                    if (ret && ret.data && ret.data.text) {
+                        ocrText = ret.data.text;
+                    }
+                } catch (ocrErr) {
+                    console.warn('Tesseract OCR error:', ocrErr);
+                }
+            }
+
+            try {
+                const formData = new FormData();
+                if (ocrText && ocrText.trim().length > 0) {
+                    formData.append('ocr_text', ocrText);
+                }
+                formData.append('image', file);
+
+                const res = await fetch('/api/screentime/analyze', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await res.json();
+                removeTypingIndicator(typingId);
+                renderBotResponse(data);
+            } catch (err) {
+                removeTypingIndicator(typingId);
+                renderBotResponse({
+                    reply: "Unable to analyze the screentime image. Please ensure the local PlannerBot engine is running.",
+                    action: "message"
+                });
+            }
+            scrollChat();
+        }
+
+        // Global Paste Listener (Ctrl+V / Cmd+V) for Instant Screentime Screenshot Dropping
+        window.addEventListener('paste', (e) => {
+            const items = (e.clipboardData || (e.originalEvent && e.originalEvent.clipboardData))?.items;
+            if (!items) return;
+            for (const item of items) {
+                if (item.kind === 'file' && item.type.startsWith('image/')) {
+                    const file = item.getAsFile();
+                    if (file) {
+                        e.preventDefault();
+                        processImageFile(file);
+                        return;
+                    }
+                }
+            }
+        });
+
+        // Global Drag and Drop on viewport
+        window.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+        window.addEventListener('drop', (e) => {
+            e.preventDefault();
+            if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                const file = e.dataTransfer.files[0];
+                if (file.type.startsWith('image/')) {
+                    processImageFile(file);
+                }
+            }
+        });
+
+        let activeModalReminder = null;
+        const notifiedReminderIds = new Set();
+
+        function requestNotificationPermission() {
+            if ("Notification" in window && Notification.permission === "default") {
+                Notification.requestPermission();
+            }
+        }
+        document.addEventListener('click', requestNotificationPermission, { once: true });
+
+        function playReminderChime() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const ctx = new AudioContext();
+                const playTone = (freq, startTime, duration) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, ctx.currentTime + startTime);
+                    gain.gain.setValueAtTime(0.3, ctx.currentTime + startTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + startTime + duration);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(ctx.currentTime + startTime);
+                    osc.stop(ctx.currentTime + startTime + duration);
+                };
+                // Elegant Apple/Google-like alert chime (G5 -> C6)
+                playTone(783.99, 0, 0.35);
+                playTone(1046.50, 0.15, 0.85);
+            } catch (e) {}
+        }
+
+        function showReminderModal(reminder) {
+            if (!reminder || !reminder.id) return;
+            if (notifiedReminderIds.has(reminder.id)) return;
+            notifiedReminderIds.add(reminder.id);
+
+            activeModalReminder = reminder;
+            const titleEl = document.getElementById('modal-task-title');
+            const timeEl = document.getElementById('modal-task-time');
+            if (titleEl) titleEl.innerText = reminder.task;
+
+            const due = new Date(reminder.fire_at);
+            const timeStr = isNaN(due.getTime()) ? (reminder.original_time_expr || 'Now') : due.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            if (timeEl) timeEl.innerText = `Scheduled for ${timeStr}`;
+
+            const overlay = document.getElementById('reminder-modal-overlay');
+            if (overlay) overlay.classList.add('active');
+
+            // Play sound chime
+            playReminderChime();
+
+            // Browser Notification if user is in another tab or minimized
+            if ("Notification" in window && Notification.permission === "granted") {
+                try {
+                    new Notification(`⏰ Reminder: ${reminder.task}`, {
+                        body: `Due at ${timeStr}`,
+                        icon: '/favicon.ico'
+                    });
+                } catch (e) {}
+            }
+        }
+
+        function dismissActiveModalReminder() {
+            const overlay = document.getElementById('reminder-modal-overlay');
+            if (overlay) overlay.classList.remove('active');
+            activeModalReminder = null;
+        }
+
+        async function completeActiveModalReminder() {
+            if (!activeModalReminder) return;
+            const id = activeModalReminder.id;
+            dismissActiveModalReminder();
+            try {
+                await fetch(`/api/reminders/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fired: true })
+                });
+                showToast('Task marked as completed ✓');
+            } catch (e) {}
+        }
+
+        async function snoozeActiveModalReminder(mins) {
+            if (!activeModalReminder) return;
+            const id = activeModalReminder.id;
+            dismissActiveModalReminder();
+            const newTime = new Date(Date.now() + mins * 60000).toISOString();
+            try {
+                await fetch(`/api/reminders/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fire_at: newTime, fired: false })
+                });
+                notifiedReminderIds.delete(id);
+                showToast(`Snoozed for ${mins} minutes`);
+            } catch (e) {}
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('app-toast');
+            if (!t) return;
+            t.innerText = msg;
+            t.classList.add('active');
+            setTimeout(() => t.classList.remove('active'), 2800);
+        }
+
+        function initRealtimeReminders() {
+            // Real-Time EventSource connection to /api/events
+            try {
+                const es = new EventSource('/api/events');
+                es.addEventListener('reminder_due', (e) => {
+                    try {
+                        const rem = JSON.parse(e.data);
+                        showReminderModal(rem);
+                    } catch (err) {}
+                });
+            } catch (e) {}
+
+            // Immediate check and recurring poll every 3 seconds
+            const checkDue = async () => {
+                try {
+                    const res = await fetch('/api/reminders/due');
+                    if (res.ok) {
+                        const list = await res.json();
+                        if (Array.isArray(list)) {
+                            list.forEach(r => showReminderModal(r));
+                        }
+                    }
+                } catch (e) {}
+            };
+            checkDue();
+            setInterval(checkDue, 3000);
+        }
+
+        window.onload = initialize;
+    </script>
+</body>
+</html>

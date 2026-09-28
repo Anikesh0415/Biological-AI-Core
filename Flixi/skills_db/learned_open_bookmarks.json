@@ -1,0 +1,9 @@
+{
+  "name": "open bookmarks",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+b"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "search notion",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+p"
+    }
+  ]
+}

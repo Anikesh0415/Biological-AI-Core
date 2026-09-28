@@ -1,0 +1,25 @@
+node_modules/
+dist/
+dist-ssr/
+.local
+.env
+.env.
+.DS_Store
+
+# Proprietary Raw Data (STRICTLY IGNORED)
+*.csv
+*.sql
+.db
+.sqlite
+*.zip
+fs369data/
+FS369
+FS437
+raw_spike_data/
+raw_data/
+
+# ONLY allow the explicitly derived abstraction JSONs
+!neural_network_data.json
+!cosmic_network_data.json
+!neural_advanced_metrics.json
+!cosmic_advanced_metrics.json

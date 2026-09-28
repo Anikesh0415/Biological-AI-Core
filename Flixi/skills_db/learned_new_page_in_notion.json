@@ -1,0 +1,9 @@
+{
+  "name": "new page in notion",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+n"
+    }
+  ]
+}

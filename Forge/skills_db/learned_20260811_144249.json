@@ -1,0 +1,73 @@
+{
+  "name": "turn on bluetooth",
+  "actions": [
+    {
+      "type": "type",
+      "text": "["
+    },
+    {
+      "type": "type",
+      "text": "b"
+    },
+    {
+      "type": "type",
+      "text": "l"
+    },
+    {
+      "type": "type",
+      "text": "u"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "click_element",
+      "name": "Bluetooth"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": " "
+    }
+  ]
+}

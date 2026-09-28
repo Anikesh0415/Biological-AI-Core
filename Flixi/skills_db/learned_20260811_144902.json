@@ -1,0 +1,600 @@
+{
+  "name": "opening brave and searching for NCERT chapter , downloading chapter attaching it to gemini,asing gemini to summarize it copying the generated text and opening notepad and pasting the text and saving the document",
+  "actions": [
+    {
+      "type": "type",
+      "text": "["
+    },
+    {
+      "type": "type",
+      "text": "b"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "v"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "move",
+      "x": 1899,
+      "y": 25
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "click_element",
+      "name": "Ask anything, find anything."
+    },
+    {
+      "type": "type",
+      "text": " "
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": " "
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "l"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "1"
+    },
+    {
+      "type": "type",
+      "text": "1"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "p"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "y"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "p"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "2"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "p"
+    },
+    {
+      "type": "type",
+      "text": "d"
+    },
+    {
+      "type": "type",
+      "text": "f"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "click_element",
+      "name": "?? NCERT ncert.nic.in \u003e textbook.php Textbooks PDF (I-XII)"
+    },
+    {
+      "type": "click_element",
+      "name": "(Open)"
+    },
+    {
+      "type": "click_element",
+      "name": "Download"
+    },
+    {
+      "type": "click_element",
+      "name": "Save"
+    },
+    {
+      "type": "move",
+      "x": 1914
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "type",
+      "text": "["
+    },
+    {
+      "type": "type",
+      "text": "g"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "m"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "click_element",
+      "name": "Forge"
+    },
+    {
+      "type": "move",
+      "x": 622,
+      "y": 703
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "click_element",
+      "name": "Downloads"
+    },
+    {
+      "type": "click_element",
+      "name": "Name"
+    },
+    {
+      "type": "click_element",
+      "name": "Open"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "u"
+    },
+    {
+      "type": "type",
+      "text": "m"
+    },
+    {
+      "type": "type",
+      "text": "m"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "\b"
+    },
+    {
+      "type": "type",
+      "text": "\b"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "z"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "h"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "d"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "u"
+    },
+    {
+      "type": "type",
+      "text": "m"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "move",
+      "x": 1843,
+      "y": 953
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "move",
+      "x": 470,
+      "y": 521
+    },
+    {
+      "type": "sleep",
+      "ms": 200
+    },
+    {
+      "type": "click"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "click_element",
+      "name": "Desktop"
+    },
+    {
+      "type": "type",
+      "text": "["
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "p"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "d"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": "v"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "\b"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "u"
+    },
+    {
+      "type": "type",
+      "text": "m"
+    },
+    {
+      "type": "type",
+      "text": "m"
+    },
+    {
+      "type": "type",
+      "text": "a"
+    },
+    {
+      "type": "type",
+      "text": "r"
+    },
+    {
+      "type": "type",
+      "text": "i"
+    },
+    {
+      "type": "type",
+      "text": "s"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "d"
+    },
+    {
+      "type": "type",
+      "text": "space"
+    },
+    {
+      "type": "type",
+      "text": "d"
+    },
+    {
+      "type": "type",
+      "text": "o"
+    },
+    {
+      "type": "type",
+      "text": "c"
+    },
+    {
+      "type": "type",
+      "text": "u"
+    },
+    {
+      "type": "type",
+      "text": "m"
+    },
+    {
+      "type": "type",
+      "text": "e"
+    },
+    {
+      "type": "type",
+      "text": "n"
+    },
+    {
+      "type": "type",
+      "text": "d"
+    },
+    {
+      "type": "type",
+      "text": "\b"
+    },
+    {
+      "type": "type",
+      "text": "t"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": " "
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "open task manager",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+shift+esc"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "open quick link",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+x"
+    }
+  ]
+}

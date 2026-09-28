@@ -1,0 +1,1 @@
+package main; import ("fmt"; "os/exec"); func main() { cmd := exec.Command("E:\\AIF_Project\\llama.cpp\\build\\bin\\Release\\llama-cli.exe", "-m", "E:\\AIF_Project\\models\\qwen2.5-0.5b-instruct-q4_k_m.gguf", "-p", "Output JSON: [{\"type\": \"click\"}]"); out, err := cmd.CombinedOutput(); fmt.Println("Error:", err); fmt.Println("Out:", string(out)) }

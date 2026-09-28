@@ -1,0 +1,9 @@
+{
+  "name": "select all",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+a"
+    }
+  ]
+}

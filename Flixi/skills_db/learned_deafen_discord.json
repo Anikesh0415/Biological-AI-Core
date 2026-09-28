@@ -1,0 +1,9 @@
+{
+  "name": "deafen discord",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+shift+d"
+    }
+  ]
+}

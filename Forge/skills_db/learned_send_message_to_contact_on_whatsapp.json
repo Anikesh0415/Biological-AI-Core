@@ -1,0 +1,65 @@
+{
+  "name": "send {message} to {contact} on whatsapp",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "type",
+      "text": "whatsapp"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    },
+    {
+      "type": "sleep",
+      "ms": 4000
+    },
+    {
+      "type": "key",
+      "key": "ctrl+f"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "type",
+      "text": "{contact}"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "type",
+      "text": "{message}"
+    },
+    {
+      "type": "sleep",
+      "ms": 500
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    }
+  ]
+}

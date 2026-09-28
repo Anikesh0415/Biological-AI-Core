@@ -1,0 +1,9 @@
+{
+  "name": "save",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+s"
+    }
+  ]
+}

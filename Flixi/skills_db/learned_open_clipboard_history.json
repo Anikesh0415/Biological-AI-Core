@@ -1,0 +1,9 @@
+{
+  "name": "open clipboard history",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+v"
+    }
+  ]
+}

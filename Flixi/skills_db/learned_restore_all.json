@@ -1,0 +1,9 @@
+{
+  "name": "restore all",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+shift+m"
+    }
+  ]
+}

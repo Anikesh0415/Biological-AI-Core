@@ -1,0 +1,9 @@
+{
+  "name": "hard refresh",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+f5"
+    }
+  ]
+}

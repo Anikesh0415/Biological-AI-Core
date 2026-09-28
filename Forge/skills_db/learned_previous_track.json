@@ -1,0 +1,9 @@
+{
+  "name": "previous track",
+  "actions": [
+    {
+      "type": "key",
+      "key": "audio_prev"
+    }
+  ]
+}

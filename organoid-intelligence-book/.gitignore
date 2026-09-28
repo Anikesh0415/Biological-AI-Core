@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Large Raw Datasets (accessible via FinalSpark / Zenodo links)
+*.hdf5
+*.h5
+*.parquet
+*.zip
+*.tar.gz
+
+# Environment and editor files
+.vscode/
+.idea/
+*.swp
+*.log
+
+# TeX temporary build files
+*.aux
+*.out
+*.toc
+*.log
+*.fls
+*.fdb_latexmk
+texput.*

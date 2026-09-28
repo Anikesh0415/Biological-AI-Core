@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this work, textbook, or code in your research, please cite it as below."
+authors:
+  - family-names: "Tiwari"
+    given-names: "Anikesh"
+title: "Organoid Intelligence: From Foundations to Frontier Wetware Computing"
+version: 1.0.0
+date-released: 2026-09-08
+url: "https://github.com/Anikesh0415/organoid-intelligence-book"
+keywords:
+  - "organoid intelligence"
+  - "wetware computing"
+  - "neural organoids"
+  - "biological half-adder"
+  - "transfer entropy"
+  - "inverse ising model"
+  - "topological data analysis"
+  - "renormalization group flow"
+  - "finalspark"
+  - "computational neuroscience"
+license: "MIT"
+type: book

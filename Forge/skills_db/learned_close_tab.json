@@ -1,0 +1,9 @@
+{
+  "name": "close tab",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+w"
+    }
+  ]
+}

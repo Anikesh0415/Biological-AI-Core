@@ -1,0 +1,25 @@
+{
+  "name": "search {query} on abercrombie & fitch",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+r"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "type",
+      "text": "brave https://www.abercrombie.com/shop/us/search?departmentCategoryId=10000&searchTerm={query}"
+    },
+    {
+      "type": "sleep",
+      "ms": 800
+    },
+    {
+      "type": "key",
+      "key": "enter"
+    }
+  ]
+}

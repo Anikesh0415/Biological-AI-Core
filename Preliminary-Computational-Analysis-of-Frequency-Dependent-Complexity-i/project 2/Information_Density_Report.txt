@@ -1,0 +1,50 @@
+======================================
+       Information Density Report     
+======================================
+
+1. Analysis Parameters:
+   - Window Duration: 60.0 seconds
+   - Number of Channels Analyzed: 10
+
+2. Multi-Resolution Complexity & Entropy Analysis:
+
+--- Bin Size: 10.0 ms ---
+  State 1: Spontaneous Activity (Baseline)
+     - Mean Normalized LZC: 0.4506
+     - Mean Approx Entropy: 0.3180
+  State 2: Stimulated Activity
+     - Mean Normalized LZC: 0.7731
+     - Mean Approx Entropy: 0.5292
+  Complexity Shift:
+     - Delta LZC:  +0.3226 (+71.59%)
+     - p-value LZC: 1.9531e-03
+     - Delta ApEn: +0.2112 (+66.40%)
+     - p-value ApEn: 1.9531e-03
+
+--- Bin Size: 25.0 ms ---
+  State 1: Spontaneous Activity (Baseline)
+     - Mean Normalized LZC: 0.7841
+     - Mean Approx Entropy: 0.5323
+  State 2: Stimulated Activity
+     - Mean Normalized LZC: 1.0359
+     - Mean Approx Entropy: 0.6903
+  Complexity Shift:
+     - Delta LZC:  +0.2517 (+32.10%)
+     - p-value LZC: 1.9531e-03
+     - Delta ApEn: +0.1580 (+29.68%)
+     - p-value ApEn: 1.9531e-03
+
+--- Bin Size: 50.0 ms ---
+  State 1: Spontaneous Activity (Baseline)
+     - Mean Normalized LZC: 1.0153
+     - Mean Approx Entropy: 0.6703
+  State 2: Stimulated Activity
+     - Mean Normalized LZC: 0.8944
+     - Mean Approx Entropy: 0.5959
+  Complexity Shift:
+     - Delta LZC:  -0.1210 (-11.91%)
+     - p-value LZC: 1.9531e-03
+     - Delta ApEn: -0.0744 (-11.10%)
+     - p-value ApEn: 1.9531e-03
+
+======================================

@@ -1,0 +1,21 @@
+{
+  "name": "create a new folder",
+  "actions": [
+    {
+      "type": "click_element",
+      "name": "Desktop"
+    },
+    {
+      "type": "type",
+      "text": "\r"
+    },
+    {
+      "type": "type",
+      "text": "¢"
+    },
+    {
+      "type": "type",
+      "text": " "
+    }
+  ]
+}

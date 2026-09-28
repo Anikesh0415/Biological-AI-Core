@@ -1,0 +1,9 @@
+{
+  "name": "print",
+  "actions": [
+    {
+      "type": "key",
+      "key": "ctrl+p"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "minimize all windows",
+  "actions": [
+    {
+      "type": "key",
+      "key": "win+d"
+    }
+  ]
+}
