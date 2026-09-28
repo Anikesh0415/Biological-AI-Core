@@ -1,1 +1,0 @@
-The raw biological MEA datasets (FS369 and FS437) utilized to calculate these graph metrics are proprietary to FinalSpark and have been kept strictly confidential. Only the deeply filtered, abstracted graph topology metrics (Nodes, Edges, PageRank, Clustering Coefficient) are included in this repository to power the visualization dashboard.

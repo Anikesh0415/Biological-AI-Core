@@ -59,9 +59,8 @@ I am a 16 year old independent researcher and the sole author behind the researc
 > **I am currently raising a \$60,000 Preseed round.**
 
 ### Capital Allocation:
-1. **Local High Throughput Compute Workstation (\$25k to \$30k):**
-   - High core count AMD Ryzen Threadripper PRO 7000 series workstation with 256GB ECC DDR5 RAM.
-   - Required to parallelize exact Inverse Ising likelihood solvers, Markov Chain Monte Carlo (MCMC) sampling, and combinatorial Bivariate Transfer Entropy channel scans.
+1. **Hardware (\$25k to \$30k):**
+   - High throughput local compute hardware required to parallelize exact Inverse Ising likelihood solvers, Markov Chain Monte Carlo (MCMC) sampling, and combinatorial Bivariate Transfer Entropy channel scans.
 2. **Physical Wetware Incubation and Perfusion Rig (\$20k):**
    - Microfluidic perfusion chambers and automated environmental controllers to extend organoid viability for multiday closed loop reinforcement learning protocols.
 3. **Electrophysiology and Stimulation Hardware (\$10k to \$15k):**
@@ -73,7 +72,7 @@ I am a 16 year old independent researcher and the sole author behind the researc
 
 ## Repository Index and Architecture
 
-This monorepo consolidates my 10 core research pillars:
+This monorepo consolidates my core research pillars:
 
 | Module / Directory | Focus Area and Methodology | Artifacts |
 | :--- | :--- | :--- |
@@ -86,7 +85,6 @@ This monorepo consolidates my 10 core research pillars:
 | [`Detection-Limit-in-OI/`](./Detection-Limit-in-OI) | Microelectrode resolution boundaries and SNR limits for in vitro intelligence | Research Paper |
 | [`Preliminary-Computational-Analysis-...`](./Preliminary-Computational-Analysis-of-Frequency-Dependent-Complexity-i) | Spectral decomposition and multiscale Lempel Ziv complexity on MEA channels | Research Paper |
 | [`organoid-intelligence-book/`](./organoid-intelligence-book) | Comprehensive 14 chapter technical treatise, mathematical proofs, and protocols | Monograph and Book |
-| [`cosmological-bridge/`](./cosmological-bridge) | Formal nonlinear dynamic analogies and multiscale complex systems modeling | Theoretical Paper |
 
 ---
 
