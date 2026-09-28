@@ -1,108 +1,96 @@
-# Biological-AI-Core: Organoid Intelligence & Wetware Computing Architecture
+# Biological-AI-Core: Organoid Intelligence and Wetware Computing Architecture
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Hardware](https://img.shields.io/badge/Interface-FinalSpark%20MEA-darkgreen.svg)](#)
 [![Math](https://img.shields.io/badge/Methods-Inverse%20Ising%20%7C%20Transfer%20Entropy-crimson.svg)](#)
-[![Funding](https://img.shields.io/badge/Pre--Seed-Raising%20%2460k-gold.svg)](#-pre-seed-funding--compute-roadmap)
+[![Funding](https://img.shields.io/badge/Preseed-Raising%20%2460k-gold.svg)](#preseed-funding-and-compute-roadmap)
 
 > **Bypassing the Thermodynamic Wall of Silicon.**  
-> Modern deep learning compute has collided with a physical wall: megawatt datacenter clusters running dense matrix multiplication to approximate basic intelligence. In contrast, 3D biological cerebral organoids compute, adapt, and self-organize at a thermodynamic cost of **~20 Watts**.  
+> Modern deep learning compute has collided with a physical wall: megawatt datacenter clusters running dense matrix multiplication to approximate basic intelligence. In contrast, 3D biological cerebral organoids compute, adapt, and self organize at a thermodynamic cost of **~20 Watts**.  
 >  
-> **Biological-AI-Core** is the unified monorepo consolidating 10 peer-reviewed research papers, open-source algorithms, and electrophysiological signal-processing pipelines engineered to interface with living human brain organoids for biocomputation.
+> **Biological-AI-Core** is the unified monorepo consolidating my 10 peer reviewed research papers, open source algorithms, and electrophysiological signal processing pipelines engineered to interface with living human brain organoids for biocomputation.
 
 ---
 
-## ⚡ Core Theoretical & Mathematical Framework
+## Core Theoretical and Mathematical Framework
 
-Our biological computing architecture processes live microelectrode recordings from the **FinalSpark Microelectrode Array (MEA)** (16/32/64-channel extracellular electrophysiology platforms):
+My biological computing architecture processes live microelectrode recordings from the **FinalSpark Microelectrode Array (MEA)** across 16, 32, and 64 channel extracellular electrophysiology platforms:
 
 ```mermaid
 flowchart TD
     subgraph Acquisition ["Wetware Electrophysiology Interface"]
         direction TB
-        A["🧠 Living Cerebral Organoid"] --> B["⚡ FinalSpark 64-Channel MEA"]
-        B --> C["📈 Extracellular Multi-Channel Spike Rasters"]
+        A["Living Cerebral Organoid"] --> B["FinalSpark 64 Channel MEA"]
+        B --> C["Extracellular Multi Channel Spike Rasters"]
     end
 
-    C --> D["🧮 Inverse Ising Mechanics<br/><b>Effective Synaptic Coupling Topology</b><br/>H = -∑ J_ij s_i s_j - ∑ h_i s_i"]
-    C --> E["🔀 Bivariate Transfer Entropy<br/><b>Directional Causal Information Flow</b><br/>T(X→Y) = ∑ p(y, x) log[p / p]"]
+    C --> D["Inverse Ising Mechanics<br/><b>Effective Synaptic Coupling Topology</b><br/>H = -∑ J_ij s_i s_j - ∑ h_i s_i"]
+    C --> E["Bivariate Transfer Entropy<br/><b>Directional Causal Information Flow</b><br/>T(X→Y) = ∑ p(y, x) log[p / p]"]
 
-    D --> F["🎯 Closed-Loop Neuromorphic Policy"]
+    D --> F["Closed Loop Neuromorphic Policy"]
     E --> F
 ```
 
-### 1. Maximum Entropy & Inverse Ising Mechanics
-We map multielectrode spiking time-bins into instantaneous spin configurations $s \in \lbrace -1, +1 \rbrace^N$. To reconstruct the latent functional connectome without confounding indirect correlations, we solve the inverse problem for the pairwise maximum entropy Boltzmann distribution:
+### 1. Maximum Entropy and Inverse Ising Mechanics
+I map multielectrode spiking time bins into instantaneous spin configurations $s \in \lbrace -1, +1 \rbrace^N$. To reconstruct the latent functional connectome without confounding indirect correlations, I solve the inverse problem for the pairwise maximum entropy Boltzmann distribution:
 
 $$
 P(s) = \frac{1}{\mathcal{Z}} \exp \left( \sum_{i < j} J_{ij} s_i s_j + \sum_{i} h_i s_i \right)
 $$
 
-Through Persistent Contrastive Divergence (PCD) and pseudo-likelihood maximization, our algorithms fit the effective synaptic coupling matrix $J_{ij}$ and local intrinsic excitabilities $h_i$ to assess organoid criticality and functional plasticity.
+Through Persistent Contrastive Divergence (PCD) and pseudolikelihood maximization, my algorithms fit the effective synaptic coupling matrix $J_{ij}$ and local intrinsic excitabilities $h_i$ to assess organoid criticality and functional plasticity.
 
 ### 2. Bivariate Transfer Entropy (TE) for Causal Information Flow
-To quantify non-linear, directed information routing between neural assemblies, we compute bivariate transfer entropy across MEA channel pairs:
+To quantify nonlinear, directed information routing between neural assemblies, I compute bivariate transfer entropy across MEA channel pairs:
 
 $$
 T_{X \to Y} = \sum_{y_{t+1}, y_t, x_t} p(y_{t+1}, y_t, x_t) \log_2 \left( \frac{p(y_{t+1} \mid y_t, x_t)}{p(y_{t+1} \mid y_t)} \right)
 $$
 
-By applying spike-jittering surrogate null models, we isolate true directional synaptic transmission from shared volume conduction and external stimulus artifacts.
+By applying spike jittering surrogate null models, I isolate true directional synaptic transmission from shared volume conduction and external stimulus artifacts.
 
 ---
 
-## 🚀 Pre-Seed Funding & Compute Roadmap
+## Preseed Funding and Compute Roadmap
 
-I am a 16-year-old independent researcher and the lead author behind the research publications and codebases unified in this repository.
+I am a 16 year old independent researcher and the sole author behind the research publications and codebases unified in this repository.
 
 > [!IMPORTANT]
-> **We are currently raising a \$60,000 Pre-Seed round.**
+> **I am currently raising a \$60,000 Preseed round.**
 
 ### Capital Allocation:
-1. **Local High-Throughput Compute Workstation (\$25k - \$30k):**
-   - High-core-count AMD Ryzen Threadripper PRO 7000-series workstation with 256GB ECC DDR5 RAM.
+1. **Local High Throughput Compute Workstation (\$25k to \$30k):**
+   - High core count AMD Ryzen Threadripper PRO 7000 series workstation with 256GB ECC DDR5 RAM.
    - Required to parallelize exact Inverse Ising likelihood solvers, Markov Chain Monte Carlo (MCMC) sampling, and combinatorial Bivariate Transfer Entropy channel scans.
-2. **Physical Wetware Incubation & Perfusion Rig (\$20k):**
-   - Microfluidic perfusion chambers and automated environmental controllers to extend organoid viability for multi-day closed-loop reinforcement learning protocols.
-3. **Electrophysiology & Stimulation Hardware (\$10k - \$15k):**
-   - FinalSpark cloud API access compute credits, high-speed DAC stimulation generators, and low-noise analog signal filters.
+2. **Physical Wetware Incubation and Perfusion Rig (\$20k):**
+   - Microfluidic perfusion chambers and automated environmental controllers to extend organoid viability for multiday closed loop reinforcement learning protocols.
+3. **Electrophysiology and Stimulation Hardware (\$10k to \$15k):**
+   - FinalSpark cloud API access compute credits, high speed DAC stimulation generators, and low noise analog signal filters.
 
 *Inquiries from angel investors, neurotechnology funds, and academic collaborators are welcome via email or GitHub issues.*
 
 ---
 
-## 📂 Repository Index & Architecture
+## Repository Index and Architecture
 
-This monorepo consolidates 10 core research pillars alongside supportive neuro-computational modules:
+This monorepo consolidates my 10 core research pillars:
 
-### 🧠 Primary Organoid Intelligence Research Pillars
-
-| Module / Directory | Focus Area & Methodology | Artifacts |
+| Module / Directory | Focus Area and Methodology | Artifacts |
 | :--- | :--- | :--- |
-| [`wetware_thermodynamics/`](./wetware_thermodynamics) | Non-equilibrium thermodynamic efficiency, Inverse Ising solvers, & Landauer dissipation limits | Paper & Pipeline |
-| [`wetware_causal_logic/`](./wetware_causal_logic) | Bivariate Transfer Entropy and directional information routing in wetware networks | Paper & Code |
-| [`wetware_scaling_laws/`](./wetware_scaling_laws) | Power-law avalanche distributions, Zipf's law, & Self-Organized Criticality (SOC) | Paper & Code |
-| [`wetware_geometry_chaos/`](./wetware_geometry_chaos) | Attractor dynamics, Lyapunov spectrum, and phase-space reconstruction | Paper & Code |
-| [`wetware_reservoir_memory/`](./wetware_reservoir_memory) | Liquid state computing, echo-state memory retention, & biological state readout | Paper & Benchmarks |
-| [`bio_logic_gates/`](./bio_logic_gates) | Bi-directional electro-stimulation encoding & biological Boolean logic gates | Paper & Code |
-| [`Detection-Limit-in-OI/`](./Detection-Limit-in-OI) | Microelectrode resolution boundaries & SNR limits for in-vitro intelligence | Research Paper |
-| [`Preliminary-Computational-Analysis-...`](./Preliminary-Computational-Analysis-of-Frequency-Dependent-Complexity-i) | Spectral decomposition & multi-scale Lempel-Ziv complexity on MEA channels | Research Paper |
-| [`organoid-intelligence-book/`](./organoid-intelligence-book) | Comprehensive 14-chapter technical treatise, mathematical proofs, & protocols | Monograph & Book |
-| [`cosmological-bridge/`](./cosmological-bridge) | Formal non-linear dynamic analogies & multi-scale complex systems modeling | Theoretical Paper |
-
-### 🛠️ Ancillary Infrastructure & Simulation Frameworks
-
-| Tool / Framework | Description |
-| :--- | :--- |
-| [`PlannerBot/`](./PlannerBot) | Sovereign Cognitive Engine: offline, on-device AI focus coach & task engine |
-| [`Forge/`](./Forge) | Autonomous task execution & research workflow automation pipeline |
-| [`Flixi/`](./Flixi) | High-throughput data processing & sequence generation framework |
-| [`ExoVision/`](./ExoVision) | Neural activity visualization & computer-vision assisted inspection |
-| [`minecraft-file/`](./minecraft-file) | Embodied simulation sandbox for closed-loop behavioral experiments |
+| [`wetware_thermodynamics/`](./wetware_thermodynamics) | Nonequilibrium thermodynamic efficiency, Inverse Ising solvers, and Landauer dissipation limits | Paper and Pipeline |
+| [`wetware_causal_logic/`](./wetware_causal_logic) | Bivariate Transfer Entropy and directional information routing in wetware networks | Paper and Code |
+| [`wetware_scaling_laws/`](./wetware_scaling_laws) | Power law avalanche distributions, Zipf's law, and Self Organized Criticality (SOC) | Paper and Code |
+| [`wetware_geometry_chaos/`](./wetware_geometry_chaos) | Attractor dynamics, Lyapunov spectrum, and phase space reconstruction | Paper and Code |
+| [`wetware_reservoir_memory/`](./wetware_reservoir_memory) | Liquid state computing, echo state memory retention, and biological state readout | Paper and Benchmarks |
+| [`bio_logic_gates/`](./bio_logic_gates) | Bidirectional electrostimulation encoding and biological Boolean logic gates | Paper and Code |
+| [`Detection-Limit-in-OI/`](./Detection-Limit-in-OI) | Microelectrode resolution boundaries and SNR limits for in vitro intelligence | Research Paper |
+| [`Preliminary-Computational-Analysis-...`](./Preliminary-Computational-Analysis-of-Frequency-Dependent-Complexity-i) | Spectral decomposition and multiscale Lempel Ziv complexity on MEA channels | Research Paper |
+| [`organoid-intelligence-book/`](./organoid-intelligence-book) | Comprehensive 14 chapter technical treatise, mathematical proofs, and protocols | Monograph and Book |
+| [`cosmological-bridge/`](./cosmological-bridge) | Formal nonlinear dynamic analogies and multiscale complex systems modeling | Theoretical Paper |
 
 ---
 
-## 🛠️ Quickstart
+## Quickstart
 
 ```bash
 # Clone the unified master repository
@@ -120,12 +108,12 @@ pip install numpy scipy numba matplotlib networkx h5py
 
 ---
 
-## 📜 Citation
+## Citation
 
 ```bibtex
 @software{BiologicalAICore2026,
   author = {Anikesh Tiwari},
-  title = {Biological-AI-Core: Unified Organoid Intelligence & Wetware Computing Architecture},
+  title = {Biological-AI-Core: Unified Organoid Intelligence and Wetware Computing Architecture},
   year = {2026},
   publisher = {GitHub},
   howpublished = {\url{https://github.com/Anikesh0415/Biological-AI-Core}}
